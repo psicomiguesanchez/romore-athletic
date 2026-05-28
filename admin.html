@@ -197,8 +197,8 @@
 <body class="font-body-md overflow-x-hidden">
 
 <!-- ========== LOGIN SCREEN ========== -->
-<div id="loginScreen" class="fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50 hidden bg-background/80">
-    <div class="glass-panel rounded-2xl p-lg max-w-md w-full mx-4 inner-glow bloom-shadow">
+<div id="loginScreen" class="fixed inset-0 flex items-center justify-center backdrop-blur-md z-50 hidden bg-black/70">
+    <div class="glass-panel rounded-2xl p-lg max-w-md w-full mx-4 inner-glow bloom-shadow bg-surface-container-lowest/95 border border-primary/30">
         <!-- Logo -->
         <div class="text-center mb-lg">
             <h1 class="font-display-lg text-primary mb-sm">ROMORE</h1>
@@ -1185,4 +1185,28 @@
 
         // Resumen por categoría
         document.getElementById('statsNutricionProd').textContent = products.nutricion.length;
-        document.getElementById('statsNutricionStock').textContent = products.nutricion.reduce((sum, p) =
+        document.getElementById('statsNutricionStock').textContent = products.nutricion.reduce((sum, p) => sum + p.stock, 0);
+        document.getElementById('statsNutricionValor').textContent = '$' + products.nutricion.reduce((sum, p) => sum + (p.precio * p.stock), 0).toFixed(2);
+
+        document.getElementById('statsRopaProd').textContent = products.ropa.length;
+        document.getElementById('statsRopaStock').textContent = products.ropa.reduce((sum, p) => sum + p.stock, 0);
+        document.getElementById('statsRopaValor').textContent = '$' + products.ropa.reduce((sum, p) => sum + (p.precio * p.stock), 0).toFixed(2);
+    }
+
+    // Update Configuración
+    function updateConfiguracion() {
+        const userAgent = navigator.userAgent;
+        const browserName = userAgent.includes('Chrome') ? 'Chrome' :
+                           userAgent.includes('Safari') ? 'Safari' :
+                           userAgent.includes('Firefox') ? 'Firefox' : 'Otro';
+
+        document.getElementById('configBrowser').textContent = browserName;
+        if (sessionStartTime) {
+            document.getElementById('configLoginTime').textContent = sessionStartTime.toLocaleString('es-CO');
+        }
+    }
+</script>
+</body>
+</html>
+
+    // Exportar Dato
