@@ -33,7 +33,9 @@ app.use(helmet({
                 "https://cdn.tailwindcss.com",
                 "https://www.gstatic.com",
                 "https://www.google.com",
-                "https://www.googletagmanager.com"
+                "https://www.googletagmanager.com",
+                "https://recaptcha.net",
+                "https://challenges.cloudflare.com"
             ],
             styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdn.tailwindcss.com"],
             fontSrc: ["'self'", "https://fonts.gstatic.com"],
@@ -45,9 +47,11 @@ app.use(helmet({
                 "https://*.firebaseio.com",
                 "https://securetoken.googleapis.com",
                 "https://www.google.com",
-                "https://www.gstatic.com"
+                "https://www.gstatic.com",
+                "https://recaptcha.net",
+                "https://*.recaptcha.net"
             ],
-            frameSrc: ["'self'", "https://www.google.com"],
+            frameSrc: ["'self'", "https://www.google.com", "https://recaptcha.net", "https://challenges.cloudflare.com"],
             objectSrc: ["'none'"],
             mediaSrc: ["'self'"],
             upgradeInsecureRequests: []
