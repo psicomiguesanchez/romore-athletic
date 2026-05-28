@@ -204,7 +204,7 @@
     <div class="glass-panel rounded-2xl p-lg max-w-md w-full mx-4 inner-glow bloom-shadow bg-surface-container-lowest/95 border border-primary/30">
         <!-- Logo -->
         <div class="text-center mb-lg">
-            <img src="./logo.svg" alt="ROMORE" class="w-32 h-auto mx-auto mb-md rounded-lg" style="filter: drop-shadow(0 0 10px rgba(221, 183, 255, 0.3));">
+            <img src="./logopng.png" alt="ROMORE" class="w-32 h-auto mx-auto mb-md rounded-lg" style="filter: drop-shadow(0 0 10px rgba(221, 183, 255, 0.3));">
             <p class="font-label-md text-on-surface-variant">Sistema de Administración</p>
         </div>
 
@@ -1178,38 +1178,4 @@
             ? Math.round(productosConCosto.reduce((sum, p) => sum + ((p.precio - p.costo) / p.costo * 100), 0) / productosConCosto.length)
             : 0;
 
-        document.getElementById('totalProductosGral').textContent = allProducts.length;
-        document.getElementById('inventarioTotal').textContent = totalStock;
-        document.getElementById('costoTotalGral').textContent = '$' + costoTotal.toFixed(2);
-        document.getElementById('valorInventarioGral').textContent = '$' + valorInventario.toFixed(2);
-        document.getElementById('gananciaPotencial').textContent = '$' + gananciaPotencial.toFixed(2);
-        document.getElementById('margenPromedio').textContent = margenPromedio + '%';
-        document.getElementById('stockCritico').textContent = criticalStock;
-
-        // Resumen por categoría
-        document.getElementById('statsNutricionProd').textContent = products.nutricion.length;
-        document.getElementById('statsNutricionStock').textContent = products.nutricion.reduce((sum, p) => sum + p.stock, 0);
-        document.getElementById('statsNutricionValor').textContent = '$' + products.nutricion.reduce((sum, p) => sum + (p.precio * p.stock), 0).toFixed(2);
-
-        document.getElementById('statsRopaProd').textContent = products.ropa.length;
-        document.getElementById('statsRopaStock').textContent = products.ropa.reduce((sum, p) => sum + p.stock, 0);
-        document.getElementById('statsRopaValor').textContent = '$' + products.ropa.reduce((sum, p) => sum + (p.precio * p.stock), 0).toFixed(2);
-    }
-
-    // Update Configuración
-    function updateConfiguracion() {
-        const userAgent = navigator.userAgent;
-        const browserName = userAgent.includes('Chrome') ? 'Chrome' :
-                           userAgent.includes('Safari') ? 'Safari' :
-                           userAgent.includes('Firefox') ? 'Firefox' : 'Otro';
-
-        document.getElementById('configBrowser').textContent = browserName;
-        if (sessionStartTime) {
-            document.getElementById('configLoginTime').textContent = sessionStartTime.toLocaleString('es-CO');
-        }
-    }
-</script>
-</body>
-</html>
-
-    // Exportar Dato
+        document.getElementById('totalProductosGral').textContent = all
