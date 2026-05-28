@@ -26,34 +26,12 @@ app.use(helmet({
     contentSecurityPolicy: {
         directives: {
             defaultSrc: ["'self'"],
-            scriptSrc: [
-                "'self'",
-                "'unsafe-inline'",
-                "https://cdnjs.cloudflare.com",
-                "https://cdn.tailwindcss.com",
-                "https://www.gstatic.com",
-                "https://www.google.com",
-                "https://www.googletagmanager.com",
-                "https://recaptcha.net",
-                "https://challenges.cloudflare.com"
-            ],
+            scriptSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com", "https://cdn.tailwindcss.com", "https://www.gstatic.com", "https://www.google.com", "https://recaptcha.net"],
             styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdn.tailwindcss.com"],
-            fontSrc: ["'self'", "https://fonts.gstatic.com"],
+            fontSrc: ["'self'", "https://fonts.gstatic.com", "https://fonts.googleapis.com"],
             imgSrc: ["'self'", "data:", "https:"],
-            connectSrc: [
-                "'self'",
-                "https://*.firebaseapp.com",
-                "https://*.firebase.googleapis.com",
-                "https://*.firebaseio.com",
-                "https://securetoken.googleapis.com",
-                "https://identitytoolkit.googleapis.com",
-                "https://www.googleapis.com",
-                "https://www.google.com",
-                "https://www.gstatic.com",
-                "https://recaptcha.net",
-                "https://*.recaptcha.net"
-            ],
-            frameSrc: ["'self'", "https://www.google.com", "https://recaptcha.net", "https://challenges.cloudflare.com"],
+            connectSrc: ["'self'", "https://*.firebaseapp.com", "https://*.firebase.googleapis.com", "https://*.firebaseio.com", "https://securetoken.googleapis.com", "https://identitytoolkit.googleapis.com", "https://www.googleapis.com", "https://www.google.com", "https://www.gstatic.com", "https://recaptcha.net", "https://*.recaptcha.net"],
+            frameSrc: ["'self'", "https://www.google.com", "https://recaptcha.net"],
             objectSrc: ["'none'"],
             mediaSrc: ["'self'"],
             upgradeInsecureRequests: []
@@ -89,7 +67,7 @@ const corsOptions = {
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    maxAge: 86400, // 24 horas
+    maxAge: 86400,
     optionsSuccessStatus: 200
 };
 
@@ -97,13 +75,12 @@ app.use(cors(corsOptions));
 
 // 3. RATE LIMITING - Protección contra ataques
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutos
-    max: 100, // Máximo 100 requests por ventana
+    windowMs: 15 * 60 * 1000,
+    max: 100,
     message: '❌ Demasiadas solicitudes, intenta más tarde',
     standardHeaders: true,
     legacyHeaders: false,
     skip: (req) => {
-        // No limitar archivos estáticos
         return req.path.match(/\.(js|css|json|png|jpg|jpeg|gif|svg|ico|woff|woff2)$/);
     }
 });
@@ -121,11 +98,9 @@ const apiLimiter = rateLimit({
 // 📋 MIDDLEWARE ADICIONAL
 // ═══════════════════════════════════════════════════════════════
 
-// Parsear JSON
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
-// Registrar requests (logging)
 app.use((req, res, next) => {
     const timestamp = new Date().toISOString();
     console.log(`📨 [${timestamp}] ${req.method} ${req.path}`);
@@ -133,10 +108,9 @@ app.use((req, res, next) => {
 });
 
 // ═══════════════════════════════════════════════════════════════
-// 🔐 ENDPOINTS DE API PROTEGIDOS
+// 🔐 ENDPOINTS DE API
 // ═══════════════════════════════════════════════════════════════
 
-// Health check
 app.get('/api/health', (req, res) => {
     res.json({
         status: '✅ Servidor activo',
@@ -145,38 +119,27 @@ app.get('/api/health', (req, res) => {
     });
 });
 
-// Servir productos.json explícitamente
-app.get('/productos.json', (req, res) => {
-    res.setHeader('Cache-Control', 'public, max-age=300');
-    res.setHeader('Content-Type', 'application/json');
-    res.sendFile(path.join(__dirname, 'productos.json'));
-});
-
 // ═══════════════════════════════════════════════════════════════
 // 📁 ARCHIVOS ESTÁTICOS
 // ═══════════════════════════════════════════════════════════════
 
-// Servir archivos estáticos con headers de cache
 app.use(express.static(path.join(__dirname), {
     maxAge: '1h',
     etag: false,
-    setHeaders: (res, path) => {
-        // No cachear archivos HTML
-        if (path.endsWith('.html')) {
+    setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.html')) {
             res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
         }
-        // Cachear JSON por 5 minutos
-        if (path.endsWith('.json')) {
+        if (filePath.endsWith('.json')) {
             res.set('Cache-Control', 'public, max-age=300');
         }
     }
 }));
 
 // ═══════════════════════════════════════════════════════════════
-// 🔄 RUTAS SPA (Single Page Application)
+// 🔄 RUTAS SPA
 // ═══════════════════════════════════════════════════════════════
 
-// Servir HTML principal para rutas no encontradas
 app.get('/admin*', (req, res) => {
     res.sendFile(path.join(__dirname, 'admin.html'));
 });
@@ -189,7 +152,6 @@ app.get('/tienda*', (req, res) => {
 // ⚠️ MANEJO DE ERRORES
 // ═══════════════════════════════════════════════════════════════
 
-// 404 - Página no encontrada
 app.use((req, res) => {
     res.status(404).json({
         error: '❌ Recurso no encontrado',
@@ -198,11 +160,9 @@ app.use((req, res) => {
     });
 });
 
-// Error handler global
 app.use((err, req, res, next) => {
     console.error('❌ Error:', err.message);
 
-    // CORS error
     if (err.message === 'CORS no permitido') {
         return res.status(403).json({
             error: '❌ Origen no permitido',
@@ -210,14 +170,12 @@ app.use((err, req, res, next) => {
         });
     }
 
-    // Rate limit error
     if (err.status === 429) {
         return res.status(429).json({
             error: '❌ Demasiadas solicitudes'
         });
     }
 
-    // Default error
     res.status(err.status || 500).json({
         error: '❌ Error del servidor',
         message: process.env.NODE_ENV === 'development' ? err.message : 'Error interno'
@@ -241,16 +199,4 @@ app.listen(PORT, () => {
 ║   ✅ Helmet (Security Headers)                                 ║
 ║   ✅ CORS (Origen permitido)                                   ║
 ║   ✅ Rate Limiting (Protección DDoS)                           ║
-║   ✅ CSP (Content Security Policy)                             ║
-║   ✅ HSTS (HTTP Strict Transport)                              ║
-║   ✅ X-Frame-Options (Clickjacking)                            ║
-║   ✅ XSS Protection                                            ║
-╚════════════════════════════════════════════════════════════════╝
-    `);
-});
-
-// Graceful shutdown
-process.on('SIGTERM', () => {
-    console.log('📴 Servidor cerrando...');
-    process.exit(0);
-});
+║   ✅ CSP (Content Security Policy)                             �

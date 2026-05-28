@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://recaptcha.net; connect-src 'self' https://*.firebaseapp.com https://*.firebase.googleapis.com https://*.firebaseio.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com https://www.googleapis.com https://www.google.com https://www.gstatic.com https://recaptcha.net https://*.recaptcha.net; frame-src 'self' https://www.google.com https://recaptcha.net">
     <title>ROMORE Admin - VoltCore Design</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -17,7 +16,6 @@
     <script src="https://www.google.com/recaptcha/api.js?render=6LeQc_4sAAAAAJ-4HbwcfBcUAA5faSRGrYzo9hoP"></script>
 
     <script id="tailwind-config">
-        /* Tailwind config temporarily disabled to fix CSP error
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -108,7 +106,6 @@
                 }
             }
         }
-        */
     </script>
 
     <style>
@@ -157,34 +154,6 @@
         .active {
             display: block;
         }
-        /* Modal Scrollable */
-        .glass-panel {
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-        /* Modal Styles */
-        #addProductModal .glass-panel,
-        #editProductModal .glass-panel,
-        #settingsModal .glass-panel {
-            max-height: 85vh;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-        /* Scrollbar styling */
-        .glass-panel::-webkit-scrollbar {
-            width: 8px;
-        }
-        .glass-panel::-webkit-scrollbar-track {
-            background: rgba(221, 183, 255, 0.1);
-            border-radius: 10px;
-        }
-        .glass-panel::-webkit-scrollbar-thumb {
-            background: rgba(221, 183, 255, 0.3);
-            border-radius: 10px;
-        }
-        .glass-panel::-webkit-scrollbar-thumb:hover {
-            background: rgba(221, 183, 255, 0.5);
-        }
         .nav-item-active {
             background: rgba(221, 183, 255, 0.2) !important;
             color: #ddb7ff !important;
@@ -200,8 +169,8 @@
 <body class="font-body-md overflow-x-hidden">
 
 <!-- ========== LOGIN SCREEN ========== -->
-<div id="loginScreen" class="fixed inset-0 flex items-center justify-center backdrop-blur-md z-50 hidden bg-black/70">
-    <div class="glass-panel rounded-2xl p-lg max-w-md w-full mx-4 inner-glow bloom-shadow bg-surface-container-lowest/95 border border-primary/30">
+<div id="loginScreen" class="fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50 hidden bg-background/80">
+    <div class="glass-panel rounded-2xl p-lg max-w-md w-full mx-4 inner-glow bloom-shadow">
         <!-- Logo -->
         <div class="text-center mb-lg">
             <img src="./logopng.png" alt="ROMORE" class="w-32 h-auto mx-auto mb-md rounded-lg" style="filter: drop-shadow(0 0 10px rgba(221, 183, 255, 0.3));">
@@ -715,8 +684,8 @@
                 </div>
 
                 <div>
-                    <label class="font-label-md text-on-surface block mb-sm">URL de Imagen</label>
-                    <input id="productImage" type="url" class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-4 py-2 text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-all" placeholder="https://ejemplo.com/imagen.jpg">
+                    <label class="font-label-md text-on-surface block mb-sm">URL de Imagen <span class="text-tertiary text-xs">(opcional)</span></label>
+                    <input id="productImage" type="text" class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-4 py-2 text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-all" placeholder="./IMAGENES/producto.jpg">
                 </div>
 
                 <div>
@@ -763,7 +732,7 @@
                 </div>
 
                 <div>
-                    <label class="font-label-md text-on-surface block mb-sm">URL de Imagen <span style="color: #888; font-size: 12px;">(dejar en blanco para mantener actual)</span></label>
+                    <label class="font-label-md text-on-surface block mb-sm">URL de Imagen <span class="text-tertiary text-xs">(dejar en blanco para mantener actual)</span></label>
                     <input id="editProductImage" type="text" class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-4 py-2 text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-all">
                 </div>
 
@@ -1095,13 +1064,14 @@
         product.precio = parseFloat(document.getElementById('editProductPrice').value);
         product.costo = parseFloat(document.getElementById('editProductCost').value) || 0;
         product.stock = parseInt(document.getElementById('editProductStock').value);
-        product.descripcion = document.getElementById('editProductDescription').value;
 
-        // Solo actualizar imagen si el campo no está vacío
+        // Si la imagen no está vacía, actualizar; sino mantener la anterior
         const newImage = document.getElementById('editProductImage').value;
-        if (newImage && newImage.trim()) {
+        if (newImage.trim()) {
             product.imagen = newImage;
         }
+
+        product.descripcion = document.getElementById('editProductDescription').value;
 
         // Save and refresh
         saveProducts();
@@ -1178,4 +1148,53 @@
             ? Math.round(productosConCosto.reduce((sum, p) => sum + ((p.precio - p.costo) / p.costo * 100), 0) / productosConCosto.length)
             : 0;
 
-        document.getElementById('totalProductosGral').textContent = all
+        document.getElementById('totalProductosGral').textContent = allProducts.length;
+        document.getElementById('inventarioTotal').textContent = totalStock;
+        document.getElementById('costoTotalGral').textContent = '$' + costoTotal.toFixed(2);
+        document.getElementById('valorInventarioGral').textContent = '$' + valorInventario.toFixed(2);
+        document.getElementById('gananciaPotencial').textContent = '$' + gananciaPotencial.toFixed(2);
+        document.getElementById('margenPromedio').textContent = margenPromedio + '%';
+        document.getElementById('stockCritico').textContent = criticalStock;
+
+        // Resumen por categoría
+        document.getElementById('statsNutricionProd').textContent = products.nutricion.length;
+        document.getElementById('statsNutricionStock').textContent = products.nutricion.reduce((sum, p) => sum + p.stock, 0);
+        document.getElementById('statsNutricionValor').textContent = '$' + products.nutricion.reduce((sum, p) => sum + (p.precio * p.stock), 0).toFixed(2);
+
+        document.getElementById('statsRopaProd').textContent = products.ropa.length;
+        document.getElementById('statsRopaStock').textContent = products.ropa.reduce((sum, p) => sum + p.stock, 0);
+        document.getElementById('statsRopaValor').textContent = '$' + products.ropa.reduce((sum, p) => sum + (p.precio * p.stock), 0).toFixed(2);
+    }
+
+    // Update Configuración
+    function updateConfiguracion() {
+        const userAgent = navigator.userAgent;
+        const browserName = userAgent.includes('Chrome') ? 'Chrome' :
+                           userAgent.includes('Safari') ? 'Safari' :
+                           userAgent.includes('Firefox') ? 'Firefox' : 'Otro';
+
+        document.getElementById('configBrowser').textContent = browserName;
+        if (sessionStartTime) {
+            document.getElementById('configLoginTime').textContent = sessionStartTime.toLocaleString('es-CO');
+        }
+    }
+
+    // Exportar Datos
+    function exportarDatos() {
+        const datos = {
+            nutricion: products.nutricion,
+            ropa: products.ropa,
+            exportDate: new Date().toISOString()
+        };
+        const json = JSON.stringify(datos, null, 2);
+        const blob = new Blob([json], {type: 'application/json'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `ROMORE_backup_${Date.now()}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    // Limpiar Datos
+    function limpiarDatos()
