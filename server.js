@@ -26,11 +26,26 @@ app.use(helmet({
     contentSecurityPolicy: {
         directives: {
             defaultSrc: ["'self'"],
-            scriptSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com"],
-            styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+            scriptSrc: [
+                "'self'",
+                "'unsafe-inline'",
+                "https://cdnjs.cloudflare.com",
+                "https://cdn.tailwindcss.com",
+                "https://www.gstatic.com",
+                "https://www.google.com",
+                "https://www.googletagmanager.com"
+            ],
+            styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdn.tailwindcss.com"],
             fontSrc: ["'self'", "https://fonts.gstatic.com"],
             imgSrc: ["'self'", "data:", "https:"],
-            connectSrc: ["'self'"],
+            connectSrc: [
+                "'self'",
+                "https://*.firebaseapp.com",
+                "https://*.firebase.googleapis.com",
+                "https://*.firebaseio.com",
+                "https://www.google.com",
+                "https://www.gstatic.com"
+            ],
             frameSrc: ["'none'"],
             objectSrc: ["'none'"],
             mediaSrc: ["'self'"],
