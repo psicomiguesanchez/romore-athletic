@@ -46,7 +46,7 @@ app.use(helmet({
                 "https://www.google.com",
                 "https://www.gstatic.com"
             ],
-            frameSrc: ["'none'"],
+            frameSrc: ["'self'", "https://www.google.com"],
             objectSrc: ["'none'"],
             mediaSrc: ["'self'"],
             upgradeInsecureRequests: []
