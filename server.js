@@ -138,6 +138,13 @@ app.get('/api/health', (req, res) => {
     });
 });
 
+// Servir productos.json explícitamente
+app.get('/productos.json', (req, res) => {
+    res.setHeader('Cache-Control', 'public, max-age=300');
+    res.setHeader('Content-Type', 'application/json');
+    res.sendFile(path.join(__dirname, 'productos.json'));
+});
+
 // ═══════════════════════════════════════════════════════════════
 // 📁 ARCHIVOS ESTÁTICOS
 // ═══════════════════════════════════════════════════════════════
