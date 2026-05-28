@@ -46,6 +46,8 @@ app.use(helmet({
                 "https://*.firebase.googleapis.com",
                 "https://*.firebaseio.com",
                 "https://securetoken.googleapis.com",
+                "https://identitytoolkit.googleapis.com",
+                "https://www.googleapis.com",
                 "https://www.google.com",
                 "https://www.gstatic.com",
                 "https://recaptcha.net",
