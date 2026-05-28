@@ -1,0 +1,616 @@
+{
+  "productos": [
+    {
+      "nombre": "SIS GEL ISOTONIC CAF75",
+      "categoria": "General",
+      "precio": 15000,
+      "stock": 100,
+      "descripcion": "SIS GEL ISOTONIC CAF75",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SIS GEL ISOTONIC",
+      "categoria": "General",
+      "precio": 20000,
+      "stock": 100,
+      "descripcion": "SIS GEL ISOTONIC",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SIS GEL ISOTONIC ELECTROLYTE",
+      "categoria": "General",
+      "precio": 25000,
+      "stock": 100,
+      "descripcion": "SIS GEL ISOTONIC ELECTROLYTE",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SIS DOUBLE ESRESSO 150CH",
+      "categoria": "General",
+      "precio": 30000,
+      "stock": 100,
+      "descripcion": "SIS DOUBLE ESRESSO 150CH",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SIS BETA FUEL 40CH",
+      "categoria": "General",
+      "precio": 35000,
+      "stock": 100,
+      "descripcion": "SIS BETA FUEL 40CH",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SIS BETA FUEL NOOTROPICS",
+      "categoria": "General",
+      "precio": 40000,
+      "stock": 100,
+      "descripcion": "SIS BETA FUEL NOOTROPICS",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SIS BETA FUEL ELECTROLYTE",
+      "categoria": "General",
+      "precio": 45000,
+      "stock": 100,
+      "descripcion": "SIS BETA FUEL ELECTROLYTE",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "Maurten 160",
+      "categoria": "General",
+      "precio": 50000,
+      "stock": 100,
+      "descripcion": "Maurten 160",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "MAURTEN CAF100",
+      "categoria": "General",
+      "precio": 55000,
+      "stock": 100,
+      "descripcion": "MAURTEN CAF100",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "MAURTEN 100",
+      "categoria": "General",
+      "precio": 60000,
+      "stock": 100,
+      "descripcion": "MAURTEN 100",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "GEL ENERGY 32CH Y BCAAS",
+      "categoria": "General",
+      "precio": 16500,
+      "stock": 5,
+      "descripcion": "GEL ENERGY 32CH Y BCAAS",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "GEL ENERGY 27CH Y CAF",
+      "categoria": "General",
+      "precio": 16500,
+      "stock": 15,
+      "descripcion": "GEL ENERGY 27CH Y CAF",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "GEL ENERGY DOBLE SHOT 78CH",
+      "categoria": "General",
+      "precio": 28000,
+      "stock": 20,
+      "descripcion": "GEL ENERGY DOBLE SHOT 78CH",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "AMACX DRINK GEL CAF",
+      "categoria": "General",
+      "precio": 30000,
+      "stock": 100,
+      "descripcion": "AMACX DRINK GEL CAF",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "AMACX DRINK GEL",
+      "categoria": "General",
+      "precio": 35000,
+      "stock": 100,
+      "descripcion": "AMACX DRINK GEL",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "TURBO GEL AMACX",
+      "categoria": "General",
+      "precio": 40000,
+      "stock": 100,
+      "descripcion": "TURBO GEL AMACX",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "TURBO GEL AMACX CAF",
+      "categoria": "General",
+      "precio": 45000,
+      "stock": 100,
+      "descripcion": "TURBO GEL AMACX CAF",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SANTAMADRE UNUSUAL GEL 45G CAF",
+      "categoria": "General",
+      "precio": 50000,
+      "stock": 100,
+      "descripcion": "SANTAMADRE UNUSUAL GEL 45G CAF",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SANTAMADRE UNUSUAL GEL 45G",
+      "categoria": "General",
+      "precio": 55000,
+      "stock": 100,
+      "descripcion": "SANTAMADRE UNUSUAL GEL 45G",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SANTAMADRE UNUSUAL GEL 60CH",
+      "categoria": "General",
+      "precio": 60000,
+      "stock": 100,
+      "descripcion": "SANTAMADRE UNUSUAL GEL 60CH",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "GEL ENERVIT PRO 40CH",
+      "categoria": "General",
+      "precio": 15000,
+      "stock": 100,
+      "descripcion": "GEL ENERVIT PRO 40CH",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "GEL ENERVIT CAF 40CH",
+      "categoria": "General",
+      "precio": 20000,
+      "stock": 100,
+      "descripcion": "GEL ENERVIT CAF 40CH",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "CARBS 50G",
+      "categoria": "General",
+      "precio": 25000,
+      "stock": 100,
+      "descripcion": "CARBS 50G",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "CARBS 50G SODIUM",
+      "categoria": "General",
+      "precio": 30000,
+      "stock": 100,
+      "descripcion": "CARBS 50G SODIUM",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SIS BETA FUEL POLVO 80CH",
+      "categoria": "General",
+      "precio": 35000,
+      "stock": 100,
+      "descripcion": "SIS BETA FUEL POLVO 80CH",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "DRINK MIX 320",
+      "categoria": "General",
+      "precio": 40000,
+      "stock": 100,
+      "descripcion": "DRINK MIX 320",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "DRINK MIX 160",
+      "categoria": "General",
+      "precio": 45000,
+      "stock": 100,
+      "descripcion": "DRINK MIX 160",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "TURBO DRINK AMACX 40CH",
+      "categoria": "General",
+      "precio": 50000,
+      "stock": 100,
+      "descripcion": "TURBO DRINK AMACX 40CH",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "TURBO DRINK AMACX 850gr",
+      "categoria": "General",
+      "precio": 55000,
+      "stock": 100,
+      "descripcion": "TURBO DRINK AMACX 850gr",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SANTAMADRE UNUSUAL FUEL 100CH",
+      "categoria": "General",
+      "precio": 60000,
+      "stock": 100,
+      "descripcion": "SANTAMADRE UNUSUAL FUEL 100CH",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SANTAMADRE UNUSUAL FUEL CAF",
+      "categoria": "General",
+      "precio": 15000,
+      "stock": 100,
+      "descripcion": "SANTAMADRE UNUSUAL FUEL CAF",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "ISOCARB ENERVIT 60CH",
+      "categoria": "General",
+      "precio": 20000,
+      "stock": 100,
+      "descripcion": "ISOCARB ENERVIT 60CH",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SIS GOMA BETA FUEL",
+      "categoria": "General",
+      "precio": 25000,
+      "stock": 100,
+      "descripcion": "SIS GOMA BETA FUEL",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "GOMA AMACX",
+      "categoria": "General",
+      "precio": 30000,
+      "stock": 100,
+      "descripcion": "GOMA AMACX",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "GOMA AMACX TURBO",
+      "categoria": "General",
+      "precio": 35000,
+      "stock": 100,
+      "descripcion": "GOMA AMACX TURBO",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "GOMAS GU",
+      "categoria": "General",
+      "precio": 40000,
+      "stock": 100,
+      "descripcion": "GOMAS GU",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SIS BAKE ENERGY",
+      "categoria": "General",
+      "precio": 45000,
+      "stock": 100,
+      "descripcion": "SIS BAKE ENERGY",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SIS OAT BAR",
+      "categoria": "General",
+      "precio": 50000,
+      "stock": 100,
+      "descripcion": "SIS OAT BAR",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "MAURTEN SOLID 160",
+      "categoria": "General",
+      "precio": 55000,
+      "stock": 100,
+      "descripcion": "MAURTEN SOLID 160",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "BARRA CLIFF",
+      "categoria": "General",
+      "precio": 60000,
+      "stock": 100,
+      "descripcion": "BARRA CLIFF",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "STROP WAFEL GU",
+      "categoria": "General",
+      "precio": 15000,
+      "stock": 100,
+      "descripcion": "STROP WAFEL GU",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "BARRA GATORADE",
+      "categoria": "General",
+      "precio": 20000,
+      "stock": 100,
+      "descripcion": "BARRA GATORADE",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SIS PROTEIN BAR",
+      "categoria": "General",
+      "precio": 25000,
+      "stock": 100,
+      "descripcion": "SIS PROTEIN BAR",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SIS HYDRO TABLETSX20",
+      "categoria": "General",
+      "precio": 30000,
+      "stock": 100,
+      "descripcion": "SIS HYDRO TABLETSX20",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SIS HYDRO+",
+      "categoria": "General",
+      "precio": 35000,
+      "stock": 100,
+      "descripcion": "SIS HYDRO+",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "HYDRO TABLETS AMACX",
+      "categoria": "General",
+      "precio": 40000,
+      "stock": 100,
+      "descripcion": "HYDRO TABLETS AMACX",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "MORTAL HYDRATION",
+      "categoria": "General",
+      "precio": 45000,
+      "stock": 100,
+      "descripcion": "MORTAL HYDRATION",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "HYDRO BCAA ENERVIT",
+      "categoria": "General",
+      "precio": 50000,
+      "stock": 100,
+      "descripcion": "HYDRO BCAA ENERVIT",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SALTSTICK CAPSULAS 200 UNIDADES",
+      "categoria": "General",
+      "precio": 55000,
+      "stock": 100,
+      "descripcion": "SALTSTICK CAPSULAS 200 UNIDADES",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SALTSTICK CAPSULAS 100 UNIDADES",
+      "categoria": "General",
+      "precio": 60000,
+      "stock": 100,
+      "descripcion": "SALTSTICK CAPSULAS 100 UNIDADES",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SALTSTICK MASTICABLE X10",
+      "categoria": "General",
+      "precio": 15000,
+      "stock": 100,
+      "descripcion": "SALTSTICK MASTICABLE X10",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SALTSTICK MASTICABLE X60",
+      "categoria": "General",
+      "precio": 20000,
+      "stock": 100,
+      "descripcion": "SALTSTICK MASTICABLE X60",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SIS SHOT NITRATES",
+      "categoria": "General",
+      "precio": 25000,
+      "stock": 100,
+      "descripcion": "SIS SHOT NITRATES",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "AMACX BEET SHOT",
+      "categoria": "General",
+      "precio": 30000,
+      "stock": 100,
+      "descripcion": "AMACX BEET SHOT",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "UNUSUAL NITROUS D",
+      "categoria": "General",
+      "precio": 35000,
+      "stock": 100,
+      "descripcion": "UNUSUAL NITROUS D",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SIS CHERRY REGO",
+      "categoria": "General",
+      "precio": 40000,
+      "stock": 100,
+      "descripcion": "SIS CHERRY REGO",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "CHERIBUNDI",
+      "categoria": "General",
+      "precio": 45000,
+      "stock": 100,
+      "descripcion": "CHERIBUNDI",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "MAGIC CHERRY ENERVIT",
+      "categoria": "General",
+      "precio": 50000,
+      "stock": 100,
+      "descripcion": "MAGIC CHERRY ENERVIT",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "KETONE IQ",
+      "categoria": "General",
+      "precio": 55000,
+      "stock": 100,
+      "descripcion": "KETONE IQ",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "KETONE IQ CAF",
+      "categoria": "General",
+      "precio": 60000,
+      "stock": 100,
+      "descripcion": "KETONE IQ CAF",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "CREATINA MOMENTUS",
+      "categoria": "General",
+      "precio": 15000,
+      "stock": 100,
+      "descripcion": "CREATINA MOMENTUS",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "CREATINA ENERVIT",
+      "categoria": "General",
+      "precio": 20000,
+      "stock": 100,
+      "descripcion": "CREATINA ENERVIT",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "PRE WORKOUT ENERVIT",
+      "categoria": "General",
+      "precio": 25000,
+      "stock": 100,
+      "descripcion": "PRE WORKOUT ENERVIT",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SIS SHOT COLLAGEN",
+      "categoria": "General",
+      "precio": 30000,
+      "stock": 100,
+      "descripcion": "SIS SHOT COLLAGEN",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "SIS SHOT CAFFEINE",
+      "categoria": "General",
+      "precio": 35000,
+      "stock": 100,
+      "descripcion": "SIS SHOT CAFFEINE",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "DREAM SHOT",
+      "categoria": "General",
+      "precio": 40000,
+      "stock": 100,
+      "descripcion": "DREAM SHOT",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "PROTEINA MUSCLETECH",
+      "categoria": "General",
+      "precio": 260000,
+      "stock": 3,
+      "descripcion": "PROTEINA MUSCLETECH",
+      "imagenURL": "",
+      "visible": true
+    },
+    {
+      "nombre": "TRIPLE MAGNESIUM PILLAR",
+      "categoria": "General",
+      "precio": 50000,
+      "stock": 100,
+      "descripcion": "TRIPLE MAGNESIUM PILLAR",
+      "imagenURL": "",
+      "visible": true
+    }
+  ]
+}

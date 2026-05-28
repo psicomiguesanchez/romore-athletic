@@ -1,0 +1,675 @@
+{
+  "nutricion": [
+    {
+      "id": 1001,
+      "nombre": "AMACX BEET SHOT",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/AMACX BEET SHOT.jpeg",
+      "descripcion": "Producto de nutrición: AMACX BEET SHOT"
+    },
+    {
+      "id": 1002,
+      "nombre": "AMACX DRINK GEL CAF",
+      "precio": 25000,
+      "costo": 11250,
+      "stock": 12,
+      "imagen": "./IMAGENES/AMACX DRINK GEL CAF.jpeg",
+      "descripcion": "Producto de nutrición: AMACX DRINK GEL CAF"
+    },
+    {
+      "id": 1003,
+      "nombre": "AMACX DRINK GEL",
+      "precio": 25000,
+      "costo": 11250,
+      "stock": 12,
+      "imagen": "./IMAGENES/AMACX DRINK GEL.jpeg",
+      "descripcion": "Producto de nutrición: AMACX DRINK GEL"
+    },
+    {
+      "id": 1004,
+      "nombre": "BARRA CLIFF",
+      "precio": 25000,
+      "costo": 11250,
+      "stock": 12,
+      "imagen": "./IMAGENES/BARRA CLIFF.jpeg",
+      "descripcion": "Producto de nutrición: BARRA CLIFF"
+    },
+    {
+      "id": 1005,
+      "nombre": "BARRA GATORADE",
+      "precio": 25000,
+      "costo": 11250,
+      "stock": 12,
+      "imagen": "./IMAGENES/BARRA GATORADE.jpeg",
+      "descripcion": "Producto de nutrición: BARRA GATORADE"
+    },
+    {
+      "id": 1006,
+      "nombre": "CARBS 50G SODIUM",
+      "precio": 45000,
+      "costo": 20250,
+      "stock": 12,
+      "imagen": "./IMAGENES/CARBS 50G SODIUM.jpeg",
+      "descripcion": "Producto de nutrición: CARBS 50G SODIUM"
+    },
+    {
+      "id": 1007,
+      "nombre": "CARBS 50G",
+      "precio": 45000,
+      "costo": 20250,
+      "stock": 12,
+      "imagen": "./IMAGENES/CARBS 50G.jpeg",
+      "descripcion": "Producto de nutrición: CARBS 50G"
+    },
+    {
+      "id": 1008,
+      "nombre": "CHERIBUNDI",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/CHERIBUNDI.jpeg",
+      "descripcion": "Producto de nutrición: CHERIBUNDI"
+    },
+    {
+      "id": 1009,
+      "nombre": "CREATINA ENERVIT",
+      "precio": 55000,
+      "costo": 24750,
+      "stock": 12,
+      "imagen": "./IMAGENES/CREATINA ENERVIT.jpeg",
+      "descripcion": "Producto de nutrición: CREATINA ENERVIT"
+    },
+    {
+      "id": 1010,
+      "nombre": "CREATINA MOMENTUS",
+      "precio": 55000,
+      "costo": 24750,
+      "stock": 12,
+      "imagen": "./IMAGENES/CREATINA MOMENTUS.jpeg",
+      "descripcion": "Producto de nutrición: CREATINA MOMENTUS"
+    },
+    {
+      "id": 1011,
+      "nombre": "DREAM SHOT",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/DREAM SHOT.jpeg",
+      "descripcion": "Producto de nutrición: DREAM SHOT"
+    },
+    {
+      "id": 1012,
+      "nombre": "DRINK MIX 160",
+      "precio": 48000,
+      "costo": 21600,
+      "stock": 12,
+      "imagen": "./IMAGENES/DRINK MIX 160.jpeg",
+      "descripcion": "Producto de nutrición: DRINK MIX 160"
+    },
+    {
+      "id": 1013,
+      "nombre": "DRINK MIX 320",
+      "precio": 55000,
+      "costo": 24750,
+      "stock": 12,
+      "imagen": "./IMAGENES/DRINK MIX 320.jpeg",
+      "descripcion": "Producto de nutrición: DRINK MIX 320"
+    },
+    {
+      "id": 1014,
+      "nombre": "GEL ENERGY 27CH Y CAF",
+      "precio": 25000,
+      "costo": 11250,
+      "stock": 12,
+      "imagen": "./IMAGENES/GEL ENERGY 27CH Y CAF.png",
+      "descripcion": "Producto de nutrición: GEL ENERGY 27CH Y CAF"
+    },
+    {
+      "id": 1015,
+      "nombre": "GEL ENERGY 32CH Y BCAAS",
+      "precio": 25000,
+      "costo": 11250,
+      "stock": 12,
+      "imagen": "./IMAGENES/GEL ENERGY 32CH Y BCAAS.png",
+      "descripcion": "Producto de nutrición: GEL ENERGY 32CH Y BCAAS"
+    },
+    {
+      "id": 1016,
+      "nombre": "GEL ENERGY DOBLE SHOT",
+      "precio": 25000,
+      "costo": 11250,
+      "stock": 12,
+      "imagen": "./IMAGENES/GEL ENERGY DOBLE SHOT.png",
+      "descripcion": "Producto de nutrición: GEL ENERGY DOBLE SHOT"
+    },
+    {
+      "id": 1017,
+      "nombre": "GEL ENERVIT CAF 40CH",
+      "precio": 25000,
+      "costo": 11250,
+      "stock": 12,
+      "imagen": "./IMAGENES/GEL ENERVIT CAF 40CH.jpeg",
+      "descripcion": "Producto de nutrición: GEL ENERVIT CAF 40CH"
+    },
+    {
+      "id": 1018,
+      "nombre": "GEL ENERVIT PRO 40CH",
+      "precio": 25000,
+      "costo": 11250,
+      "stock": 12,
+      "imagen": "./IMAGENES/GEL ENERVIT PRO 40CH.jpeg",
+      "descripcion": "Producto de nutrición: GEL ENERVIT PRO 40CH"
+    },
+    {
+      "id": 1019,
+      "nombre": "GOMA AMACX TURBO",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/GOMA AMACX TURBO.jpeg",
+      "descripcion": "Producto de nutrición: GOMA AMACX TURBO"
+    },
+    {
+      "id": 1020,
+      "nombre": "GOMA AMACX",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/GOMA AMACX.jpeg",
+      "descripcion": "Producto de nutrición: GOMA AMACX"
+    },
+    {
+      "id": 1021,
+      "nombre": "GOMAS GU",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/GOMAS GU.jpeg",
+      "descripcion": "Producto de nutrición: GOMAS GU"
+    },
+    {
+      "id": 1022,
+      "nombre": "HYDRO BCAA ENERVIT",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/HYDRO BCAA ENERVIT.jpeg",
+      "descripcion": "Producto de nutrición: HYDRO BCAA ENERVIT"
+    },
+    {
+      "id": 1023,
+      "nombre": "HYDRO TABLETS AMACX",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/HYDRO TABLETS AMACX.jpeg",
+      "descripcion": "Producto de nutrición: HYDRO TABLETS AMACX"
+    },
+    {
+      "id": 1024,
+      "nombre": "ISOCARB ENERVIT 60CH",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/ISOCARB ENERVIT 60CH.jpeg",
+      "descripcion": "Producto de nutrición: ISOCARB ENERVIT 60CH"
+    },
+    {
+      "id": 1025,
+      "nombre": "KETONE IQ CAF",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/KETONE IQ CAF.jpeg",
+      "descripcion": "Producto de nutrición: KETONE IQ CAF"
+    },
+    {
+      "id": 1026,
+      "nombre": "KETONE IQ",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/KETONE IQ.jpeg",
+      "descripcion": "Producto de nutrición: KETONE IQ"
+    },
+    {
+      "id": 1027,
+      "nombre": "MAGIC CHERRY ENERVIT",
+      "precio": 50000,
+      "costo": 22500,
+      "stock": 12,
+      "imagen": "./IMAGENES/MAGIC CHERRY ENERVIT.jpeg",
+      "descripcion": "Producto de nutrición: MAGIC CHERRY ENERVIT"
+    },
+    {
+      "id": 1028,
+      "nombre": "MAURTEN 100",
+      "precio": 48000,
+      "costo": 21600,
+      "stock": 12,
+      "imagen": "./IMAGENES/MAURTEN 100.jpeg",
+      "descripcion": "Producto de nutrición: MAURTEN 100"
+    },
+    {
+      "id": 1029,
+      "nombre": "MAURTEN CAF100",
+      "precio": 48000,
+      "costo": 21600,
+      "stock": 12,
+      "imagen": "./IMAGENES/MAURTEN CAF100.jpeg",
+      "descripcion": "Producto de nutrición: MAURTEN CAF100"
+    },
+    {
+      "id": 1030,
+      "nombre": "MAURTEN SOLID 160",
+      "precio": 48000,
+      "costo": 21600,
+      "stock": 12,
+      "imagen": "./IMAGENES/MAURTEN SOLID 160.jpeg",
+      "descripcion": "Producto de nutrición: MAURTEN SOLID 160"
+    },
+    {
+      "id": 1031,
+      "nombre": "MORTAL HYDRATION",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/MORTAL HYDRATION.jpeg",
+      "descripcion": "Producto de nutrición: MORTAL HYDRATION"
+    },
+    {
+      "id": 1032,
+      "nombre": "Maurten 160",
+      "precio": 48000,
+      "costo": 21600,
+      "stock": 12,
+      "imagen": "./IMAGENES/Maurten 160.jpeg",
+      "descripcion": "Producto de nutrición: Maurten 160"
+    },
+    {
+      "id": 1033,
+      "nombre": "PRE WORKOUT ENERVIT",
+      "precio": 55000,
+      "costo": 24750,
+      "stock": 12,
+      "imagen": "./IMAGENES/PRE WORKOUT ENERVIT.jpeg",
+      "descripcion": "Producto de nutrición: PRE WORKOUT ENERVIT"
+    },
+    {
+      "id": 1034,
+      "nombre": "PROTEINA MUSCLETECH",
+      "precio": 50000,
+      "costo": 22500,
+      "stock": 12,
+      "imagen": "./IMAGENES/PROTEINA MUSCLETECH.jpeg",
+      "descripcion": "Producto de nutrición: PROTEINA MUSCLETECH"
+    },
+    {
+      "id": 1035,
+      "nombre": "SALTSTICK CAPSULAS 100 UNIDADES",
+      "precio": 25000,
+      "costo": 11250,
+      "stock": 12,
+      "imagen": "./IMAGENES/SALTSTICK CAPSULAS 100 UNIDADES.jpeg",
+      "descripcion": "Producto de nutrición: SALTSTICK CAPSULAS 100 UNIDADES"
+    },
+    {
+      "id": 1036,
+      "nombre": "SALTSTICK CAPSULAS 200 UNIDADES",
+      "precio": 35000,
+      "costo": 15750,
+      "stock": 12,
+      "imagen": "./IMAGENES/SALTSTICK CAPSULAS 200 UNIDADES.jpeg",
+      "descripcion": "Producto de nutrición: SALTSTICK CAPSULAS 200 UNIDADES"
+    },
+    {
+      "id": 1037,
+      "nombre": "SALTSTICK MASTICABLE X10",
+      "precio": 25000,
+      "costo": 11250,
+      "stock": 12,
+      "imagen": "./IMAGENES/SALTSTICK MASTICABLE X10.jpeg",
+      "descripcion": "Producto de nutrición: SALTSTICK MASTICABLE X10"
+    },
+    {
+      "id": 1038,
+      "nombre": "SALTSTICK MASTICABLE X60",
+      "precio": 25000,
+      "costo": 11250,
+      "stock": 12,
+      "imagen": "./IMAGENES/SALTSTICK MASTICABLE X60.jpeg",
+      "descripcion": "Producto de nutrición: SALTSTICK MASTICABLE X60"
+    },
+    {
+      "id": 1039,
+      "nombre": "SANTAMADRE UNUSUAL FUEL 100CH",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/SANTAMADRE UNUSUAL FUEL 100CH.jpeg",
+      "descripcion": "Producto de nutrición: SANTAMADRE UNUSUAL FUEL 100CH"
+    },
+    {
+      "id": 1040,
+      "nombre": "SANTAMADRE UNUSUAL FUEL CAF",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/SANTAMADRE UNUSUAL FUEL CAF.jpeg",
+      "descripcion": "Producto de nutrición: SANTAMADRE UNUSUAL FUEL CAF"
+    },
+    {
+      "id": 1041,
+      "nombre": "SANTAMADRE UNUSUAL GEL 45G CAF",
+      "precio": 25000,
+      "costo": 11250,
+      "stock": 12,
+      "imagen": "./IMAGENES/SANTAMADRE UNUSUAL GEL 45G CAF.jpeg",
+      "descripcion": "Producto de nutrición: SANTAMADRE UNUSUAL GEL 45G CAF"
+    },
+    {
+      "id": 1042,
+      "nombre": "SANTAMADRE UNUSUAL GEL 45G",
+      "precio": 25000,
+      "costo": 11250,
+      "stock": 12,
+      "imagen": "./IMAGENES/SANTAMADRE UNUSUAL GEL 45G.jpeg",
+      "descripcion": "Producto de nutrición: SANTAMADRE UNUSUAL GEL 45G"
+    },
+    {
+      "id": 1043,
+      "nombre": "SANTAMADRE UNUSUAL GEL 60CH",
+      "precio": 25000,
+      "costo": 11250,
+      "stock": 12,
+      "imagen": "./IMAGENES/SANTAMADRE UNUSUAL GEL 60CH.jpeg",
+      "descripcion": "Producto de nutrición: SANTAMADRE UNUSUAL GEL 60CH"
+    },
+    {
+      "id": 1044,
+      "nombre": "SIS BAKE ENERGY",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/SIS BAKE ENERGY.jpeg",
+      "descripcion": "Producto de nutrición: SIS BAKE ENERGY"
+    },
+    {
+      "id": 1045,
+      "nombre": "SIS BETA FUEL 40CH",
+      "precio": 48000,
+      "costo": 21600,
+      "stock": 12,
+      "imagen": "./IMAGENES/SIS BETA FUEL 40CH.jpeg",
+      "descripcion": "Producto de nutrición: SIS BETA FUEL 40CH"
+    },
+    {
+      "id": 1046,
+      "nombre": "SIS BETA FUEL ELECTROLYTE",
+      "precio": 48000,
+      "costo": 21600,
+      "stock": 12,
+      "imagen": "./IMAGENES/SIS BETA FUEL ELECTROLYTE.jpeg",
+      "descripcion": "Producto de nutrición: SIS BETA FUEL ELECTROLYTE"
+    },
+    {
+      "id": 1047,
+      "nombre": "SIS BETA FUEL NOOTROPICS",
+      "precio": 48000,
+      "costo": 21600,
+      "stock": 12,
+      "imagen": "./IMAGENES/SIS BETA FUEL NOOTROPICS.jpeg",
+      "descripcion": "Producto de nutrición: SIS BETA FUEL NOOTROPICS"
+    },
+    {
+      "id": 1048,
+      "nombre": "SIS BETA FUEL POLVO 80CH",
+      "precio": 48000,
+      "costo": 21600,
+      "stock": 12,
+      "imagen": "./IMAGENES/SIS BETA FUEL POLVO 80CH.jpeg",
+      "descripcion": "Producto de nutrición: SIS BETA FUEL POLVO 80CH"
+    },
+    {
+      "id": 1049,
+      "nombre": "SIS CHERRY REGO",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/SIS CHERRY REGO.jpeg",
+      "descripcion": "Producto de nutrición: SIS CHERRY REGO"
+    },
+    {
+      "id": 1050,
+      "nombre": "SIS DOUBLE ESRESSO 150CH",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/SIS DOUBLE ESRESSO 150CH.jpeg",
+      "descripcion": "Producto de nutrición: SIS DOUBLE ESRESSO 150CH"
+    },
+    {
+      "id": 1051,
+      "nombre": "SIS GEL ISOTONIC CAF75",
+      "precio": 25000,
+      "costo": 11250,
+      "stock": 12,
+      "imagen": "./IMAGENES/SIS GEL ISOTONIC CAF75.jpeg",
+      "descripcion": "Producto de nutrición: SIS GEL ISOTONIC CAF75"
+    },
+    {
+      "id": 1052,
+      "nombre": "SIS GEL ISOTONIC ELECTROLYTE",
+      "precio": 25000,
+      "costo": 11250,
+      "stock": 12,
+      "imagen": "./IMAGENES/SIS GEL ISOTONIC ELECTROLYTE.jpeg",
+      "descripcion": "Producto de nutrición: SIS GEL ISOTONIC ELECTROLYTE"
+    },
+    {
+      "id": 1053,
+      "nombre": "SIS GEL ISOTONIC",
+      "precio": 25000,
+      "costo": 11250,
+      "stock": 12,
+      "imagen": "./IMAGENES/SIS GEL ISOTONIC.jpeg",
+      "descripcion": "Producto de nutrición: SIS GEL ISOTONIC"
+    },
+    {
+      "id": 1054,
+      "nombre": "SIS GOMA BETA FUEL",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/SIS GOMA BETA FUEL.jpeg",
+      "descripcion": "Producto de nutrición: SIS GOMA BETA FUEL"
+    },
+    {
+      "id": 1055,
+      "nombre": "SIS HYDRO TABLETSX20",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/SIS HYDRO TABLETSX20.jpeg",
+      "descripcion": "Producto de nutrición: SIS HYDRO TABLETSX20"
+    },
+    {
+      "id": 1056,
+      "nombre": "SIS HYDRO+",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/SIS HYDRO+.jpeg",
+      "descripcion": "Producto de nutrición: SIS HYDRO+"
+    },
+    {
+      "id": 1057,
+      "nombre": "SIS OAT BAR",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/SIS OAT BAR.jpeg",
+      "descripcion": "Producto de nutrición: SIS OAT BAR"
+    },
+    {
+      "id": 1058,
+      "nombre": "SIS PROTEIN BAR",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/SIS PROTEIN BAR.jpeg",
+      "descripcion": "Producto de nutrición: SIS PROTEIN BAR"
+    },
+    {
+      "id": 1059,
+      "nombre": "SIS SHOT CAFFEINE",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/SIS SHOT CAFFEINE.jpeg",
+      "descripcion": "Producto de nutrición: SIS SHOT CAFFEINE"
+    },
+    {
+      "id": 1060,
+      "nombre": "SIS SHOT CAFFEINE2",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/SIS SHOT CAFFEINE2.jpeg",
+      "descripcion": "Producto de nutrición: SIS SHOT CAFFEINE2"
+    },
+    {
+      "id": 1061,
+      "nombre": "SIS SHOT COLLAGEN",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/SIS SHOT COLLAGEN.jpeg",
+      "descripcion": "Producto de nutrición: SIS SHOT COLLAGEN"
+    },
+    {
+      "id": 1062,
+      "nombre": "SIS SHOT COLLAGEN2",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/SIS SHOT COLLAGEN2.jpeg",
+      "descripcion": "Producto de nutrición: SIS SHOT COLLAGEN2"
+    },
+    {
+      "id": 1063,
+      "nombre": "SIS SHOT NITRATES",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/SIS SHOT NITRATES.jpeg",
+      "descripcion": "Producto de nutrición: SIS SHOT NITRATES"
+    },
+    {
+      "id": 1064,
+      "nombre": "SIS SHOT NITRATES2",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/SIS SHOT NITRATES2.jpeg",
+      "descripcion": "Producto de nutrición: SIS SHOT NITRATES2"
+    },
+    {
+      "id": 1065,
+      "nombre": "STROP WAFEL GU",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/STROP WAFEL GU.jpeg",
+      "descripcion": "Producto de nutrición: STROP WAFEL GU"
+    },
+    {
+      "id": 1066,
+      "nombre": "TRIPLE MAGNESIUM PILLAR",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/TRIPLE MAGNESIUM PILLAR.jpeg",
+      "descripcion": "Producto de nutrición: TRIPLE MAGNESIUM PILLAR"
+    },
+    {
+      "id": 1067,
+      "nombre": "TURBO DRINK AMACX 40CH",
+      "precio": 45000,
+      "costo": 20250,
+      "stock": 12,
+      "imagen": "./IMAGENES/TURBO DRINK AMACX 40CH.jpeg",
+      "descripcion": "Producto de nutrición: TURBO DRINK AMACX 40CH"
+    },
+    {
+      "id": 1068,
+      "nombre": "TURBO DRINK AMACX 850gr",
+      "precio": 45000,
+      "costo": 20250,
+      "stock": 12,
+      "imagen": "./IMAGENES/TURBO DRINK AMACX 850gr.jpeg",
+      "descripcion": "Producto de nutrición: TURBO DRINK AMACX 850gr"
+    },
+    {
+      "id": 1069,
+      "nombre": "TURBO GEL AMACX CAF",
+      "precio": 25000,
+      "costo": 11250,
+      "stock": 12,
+      "imagen": "./IMAGENES/TURBO GEL AMACX CAF.jpeg",
+      "descripcion": "Producto de nutrición: TURBO GEL AMACX CAF"
+    },
+    {
+      "id": 1070,
+      "nombre": "TURBO GEL AMACX",
+      "precio": 25000,
+      "costo": 11250,
+      "stock": 12,
+      "imagen": "./IMAGENES/TURBO GEL AMACX.jpeg",
+      "descripcion": "Producto de nutrición: TURBO GEL AMACX"
+    },
+    {
+      "id": 1071,
+      "nombre": "UNUSUAL NITROUS D",
+      "precio": 30000,
+      "costo": 13500,
+      "stock": 12,
+      "imagen": "./IMAGENES/UNUSUAL NITROUS D.jpeg",
+      "descripcion": "Producto de nutrición: UNUSUAL NITROUS D"
+    }
+  ],
+  "ropa": [
+    {
+      "id": 2001,
+      "nombre": "ROMORE TANK TOP NEGRO",
+      "precio": 85000,
+      "costo": 38250,
+      "stock": 12,
+      "imagen": "./logopng.png",
+      "descripcion": "Tank top ROMORE negro premium",
+      "talla": "M"
+    },
+    {
+      "id": 2002,
+      "nombre": "ROMORE SHORT RUNNING",
+      "precio": 95000,
+      "costo": 42750,
+      "stock": 10,
+      "imagen": "./logopng.png",
+      "descripcion": "Short de running ROMORE",
+      "talla": "L"
+    },
+    {
+      "id": 2003,
+      "nombre": "ROMORE JOGGERS",
+      "precio": 110000,
+      "costo": 49500,
+      "stock": 8,
+      "imagen": "./logopng.png",
+      "descripcion": "Joggers ROMORE confort",
+      "talla": "XL"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+# CREDENCIALES Y SECRETOS - NUNCA COMMITEAR
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+*.p12
+
+# Firebase
+firebase-adminsdk-*.json
+serviceAccountKey.json
+
+# Node/npm
+node_modules/
+npm-debug.log
+yarn-error.log
+.npm
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Temporales
+.tmp/
+temp/
+*.temp
+
+# Testing
+.coverage/
+htmlcov/
+
+# Scripts de prueba con credenciales
+test_*.py
+*_test.py
+*credentials*.py

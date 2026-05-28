@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>ROMORE Admin - VoltCore Design</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <!-- Firebase SDK (v8 - Compatible with HTML script tags) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+    <!-- reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeQc_4sAAAAAJ-4HbwcfBcUAA5faSRGrYzo9hoP"></script>
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#0c1324",
+                        "surface-container": "#191f31",
+                        "secondary": "#d3bbff",
+                        "secondary-fixed": "#ebdcff",
+                        "surface": "#0c1324",
+                        "tertiary": "#2fd9f4",
+                        "on-secondary-container": "#c8aaff",
+                        "surface-dim": "#0c1324",
+                        "error": "#ffb4ab",
+                        "inverse-surface": "#dce1fb",
+                        "primary-container": "#b76dff",
+                        "outline": "#988d9f",
+                        "surface-variant": "#2e3447",
+                        "on-background": "#dce1fb",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-fixed": "#2c0051",
+                        "primary-fixed-dim": "#ddb7ff",
+                        "surface-container-low": "#151b2d",
+                        "on-tertiary": "#00363e",
+                        "on-primary-fixed-variant": "#6900b3",
+                        "error-container": "#93000a",
+                        "tertiary-container": "#009fb4",
+                        "surface-container-lowest": "#070d1f",
+                        "secondary-fixed-dim": "#d3bbff",
+                        "on-error": "#690005",
+                        "on-surface-variant": "#cfc2d6",
+                        "on-secondary-fixed": "#260059",
+                        "on-secondary-fixed-variant": "#572ba0",
+                        "primary-fixed": "#f0dbff",
+                        "on-primary-container": "#400071",
+                        "on-surface": "#dce1fb",
+                        "outline-variant": "#4d4354",
+                        "primary": "#ddb7ff",
+                        "on-tertiary-container": "#002f36",
+                        "tertiary-fixed-dim": "#2fd9f4",
+                        "surface-tint": "#ddb7ff",
+                        "surface-container-highest": "#2e3447",
+                        "inverse-on-surface": "#2a3043",
+                        "on-tertiary-fixed": "#001f25",
+                        "on-tertiary-fixed-variant": "#004e5a",
+                        "surface-container-high": "#23293c",
+                        "surface-bright": "#33394c",
+                        "on-primary": "#490080",
+                        "tertiary-fixed": "#a2eeff",
+                        "on-secondary": "#3f0689",
+                        "inverse-primary": "#842bd2",
+                        "secondary-container": "#592da2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "margin": "32px",
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "xl": "80px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "lg": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Sora"],
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Sora"],
+                        "headline-md": ["Sora"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0c1324;
+            background-image: radial-gradient(circle at 50% 50%, #1a1535 0%, #0c1324 100%);
+            min-height: 100vh;
+            color: #dce1fb;
+        }
+        .glass-panel {
+            background: rgba(25, 31, 49, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(221, 183, 255, 0.1);
+        }
+        .inner-glow {
+            box-shadow: inset 0 1px 0 0 rgba(221, 183, 255, 0.1);
+        }
+        .bloom-shadow {
+            box-shadow: 0 0 30px rgba(183, 109, 255, 0.15);
+        }
+        .neon-border {
+            border: 1px solid transparent;
+            background: linear-gradient(#191f31, #191f31) padding-box,
+                        linear-gradient(to right, #ddb7ff, #2fd9f4) border-box;
+        }
+        .progress-scan::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: scan 3s infinite;
+        }
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hidden {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        /* Modal Scrollable */
+        .glass-panel {
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        /* Modal Styles */
+        #addProductModal .glass-panel,
+        #editProductModal .glass-panel,
+        #settingsModal .glass-panel {
+            max-height: 85vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        /* Scrollbar styling */
+        .glass-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+        .glass-panel::-webkit-scrollbar-track {
+            background: rgba(221, 183, 255, 0.1);
+            border-radius: 10px;
+        }
+        .glass-panel::-webkit-scrollbar-thumb {
+            background: rgba(221, 183, 255, 0.3);
+            border-radius: 10px;
+        }
+        .glass-panel::-webkit-scrollbar-thumb:hover {
+            background: rgba(221, 183, 255, 0.5);
+        }
+        .nav-item-active {
+            background: rgba(221, 183, 255, 0.2) !important;
+            color: #ddb7ff !important;
+            border-left: 4px solid #ddb7ff !important;
+        }
+        .nav-item-inactive {
+            background: transparent;
+            color: #cfc2d6;
+            border-left: 4px solid transparent;
+        }
+    </style>
+</head>
+<body class="font-body-md overflow-x-hidden">
+
+<!-- ========== LOGIN SCREEN ========== -->
+<div id="loginScreen" class="fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50 hidden bg-background/80">
+    <div class="glass-panel rounded-2xl p-lg max-w-md w-full mx-4 inner-glow bloom-shadow">
+        <!-- Logo -->
+        <div class="text-center mb-lg">
+            <h1 class="font-display-lg text-primary mb-sm">ROMORE</h1>
+            <p class="font-label-md text-on-surface-variant">Sistema de Administración</p>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm" onsubmit="loginAdmin(event)" class="space-y-md">
+            <!-- reCAPTCHA v3 Token (hidden) -->
+            <input id="recaptchaToken" type="hidden" value="">
+
+            <div>
+                <label class="font-label-md text-on-surface block mb-sm">Email</label>
+                <input
+                    id="adminEmail"
+                    type="email"
+                    required
+                    class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-all font-body-md"
+                    placeholder="tu-email@example.com"
+                >
+            </div>
+
+            <div>
+                <label class="font-label-md text-on-surface block mb-sm">Contraseña</label>
+                <input
+                    id="adminPassword"
+                    type="password"
+                    required
+                    class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-all font-body-md"
+                    placeholder="••••••••"
+                >
+            </div>
+
+            <!-- Error Message -->
+            <div id="loginError" class="bg-error/10 border border-error/30 rounded-lg px-4 py-3 font-label-md text-error hidden transition-all"></div>
+
+            <!-- Loading Indicator -->
+            <div id="loginLoading" class="flex items-center justify-center gap-2 hidden">
+                <div class="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+                <span class="font-label-md text-on-surface">Ingresando...</span>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+                type="submit"
+                class="w-full py-3 bg-primary text-on-primary font-label-md rounded-lg hover:shadow-[0_0_15px_rgba(221,183,255,0.4)] transition-all active:scale-95"
+            >
+                INGRESAR
+            </button>
+        </form>
+
+        <p class="text-center font-label-sm text-on-surface-variant mt-md">
+            Contacta al administrador para crear tu cuenta
+        </p>
+    </div>
+</div>
+
+<!-- ========== DASHBOARD CONTENT ========== -->
+<div id="dashboardContent" class="hidden">
+    <!-- Side Navigation Bar -->
+    <aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest/90 backdrop-blur-xl border-r border-primary/10 flex flex-col py-md z-40 shadow-xl">
+        <div class="px-gutter mb-lg text-center">
+            <img src="./logopng.png" alt="ROMORE" class="w-full h-auto mb-sm rounded-lg" style="max-width: 140px; margin: 0 auto;">
+            <h2 class="font-display-lg text-primary text-sm">ROMORE</h2>
+            <p class="font-label-sm text-on-surface-variant mt-xs">Panel de Admin</p>
+        </div>
+
+        <nav class="flex-1 px-sm space-y-xs">
+            <a class="nav-item-active flex items-center gap-sm px-md py-sm rounded-lg shadow-[inset_0_0_10px_rgba(183,109,255,0.2)] active:translate-x-1 duration-150 group cursor-pointer" id="navNutricion" href="#" onclick="switchTab('nutricion')">
+                <span class="material-symbols-outlined">restaurant</span>
+                <span class="font-label-md">Nutrición</span>
+            </a>
+            <a class="nav-item-inactive flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all group active:translate-x-1 duration-150 cursor-pointer" id="navRopa" href="#" onclick="switchTab('ropa')">
+                <span class="material-symbols-outlined">shopping_bag</span>
+                <span class="font-label-md">Ropa Deportiva</span>
+            </a>
+            <a class="nav-item-inactive flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all group active:translate-x-1 duration-150 cursor-pointer" id="navStats" href="#" onclick="switchTab('estadisticas')">
+                <span class="material-symbols-outlined">analytics</span>
+                <span class="font-label-md">Estadísticas</span>
+            </a>
+            <a class="nav-item-inactive flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all group active:translate-x-1 duration-150 cursor-pointer" id="navConfig" href="#" onclick="switchTab('configuracion')">
+                <span class="material-symbols-outlined">settings</span>
+                <span class="font-label-md">Configuración</span>
+            </a>
+        </nav>
+
+        <div class="px-md mt-auto">
+            <button class="w-full py-sm bg-primary-container text-on-primary-container font-label-md rounded-lg hover:shadow-[0_0_15px_rgba(183,109,255,0.4)] transition-all active:scale-95 flex items-center justify-center gap-xs cursor-pointer" onclick="document.getElementById('addProductModal').classList.remove('hidden')">
+                <span class="material-symbols-outlined text-[18px]">add</span>
+                Nuevo Producto
+            </button>
+            <div class="mt-md pt-md border-t border-primary/10">
+                <button class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:text-error transition-colors w-full cursor-pointer" onclick="logoutAdmin()">
+                    <span class="material-symbols-outlined">logout</span>
+                    <span class="font-label-md">Cerrar Sesión</span>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Top Navigation Bar -->
+    <header class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-lg border-b border-primary/20 flex justify-between items-center px-gutter z-50 shadow-[0_0_15px_rgba(183,109,255,0.15)]">
+        <div class="flex items-center gap-md">
+            <h2 class="font-headline-sm text-on-surface" id="pageTitle">Productos - Nutrición</h2>
+        </div>
+        <div class="flex items-center gap-md">
+            <div class="flex items-center gap-sm border-l border-outline-variant/30 pl-md">
+                <button class="p-2 text-on-surface-variant hover:bg-primary/10 rounded-full transition-all">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+                <button class="p-2 text-on-surface-variant hover:bg-primary/10 rounded-full transition-all" onclick="document.getElementById('settingsModal').classList.remove('hidden')">
+                    <span class="material-symbols-outlined">settings</span>
+                </button>
+                <div class="flex items-center gap-sm ml-sm cursor-pointer hover:bg-white/5 p-1 rounded-lg transition-all">
+                    <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary text-[12px] font-bold">
+                        RM
+                    </div>
+                    <div class="hidden xl:block">
+                        <p id="userInfo" class="font-label-md text-on-surface leading-tight">ROMORE</p>
+                        <p class="text-[10px] text-on-surface-variant uppercase tracking-widest">Admin</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="ml-64 pt-24 px-margin pb-lg">
+        <!-- NUTRICIÓN TAB -->
+        <div id="tabNutricion" class="tab-content">
+            <!-- Stats Cards -->
+            <section class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-lg">
+                <div class="glass-panel rounded-xl p-md inner-glow bloom-shadow">
+                    <div class="flex justify-between items-start mb-sm">
+                        <div>
+                            <p class="font-label-md text-on-surface-variant mb-xs">Total Productos</p>
+                            <h3 class="font-headline-md text-primary" id="totalProductsNutricion">0</h3>
+                        </div>
+                        <div class="p-2 bg-primary/10 rounded-lg">
+                            <span class="material-symbols-outlined text-primary">inventory_2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-xl p-md inner-glow bloom-shadow">
+                    <div class="flex justify-between items-start mb-sm">
+                        <div>
+                            <p class="font-label-md text-on-surface-variant mb-xs">Costo Total</p>
+                            <h3 class="font-headline-md text-error" id="costoTotalNutricion">$0</h3>
+                        </div>
+                        <div class="p-2 bg-error/10 rounded-lg">
+                            <span class="material-symbols-outlined text-error">paid</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-xl p-md inner-glow bloom-shadow">
+                    <div class="flex justify-between items-start mb-sm">
+                        <div>
+                            <p class="font-label-md text-on-surface-variant mb-xs">Valor Venta</p>
+                            <h3 class="font-headline-md text-primary" id="valorTotalNutricion">$0</h3>
+                        </div>
+                        <div class="p-2 bg-primary/10 rounded-lg">
+                            <span class="material-symbols-outlined text-primary">attach_money</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-xl p-md inner-glow bloom-shadow">
+                    <div class="flex justify-between items-start mb-sm">
+                        <div>
+                            <p class="font-label-md text-on-surface-variant mb-xs">Ganancia Bruta</p>
+                            <h3 class="font-headline-md text-secondary" id="gananciaBrutaNutricion">$0</h3>
+                        </div>
+                        <div class="p-2 bg-secondary/10 rounded-lg">
+                            <span class="material-symbols-outlined text-secondary">trending_up</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Products Table -->
+            <section class="glass-panel rounded-xl overflow-hidden inner-glow bloom-shadow">
+                <div class="p-md border-b border-outline-variant/20 flex justify-between items-center">
+                    <h3 class="font-headline-sm text-on-surface">Productos - Nutrición</h3>
+                    <button
+                        onclick="document.getElementById('addProductModal').classList.remove('hidden')"
+                        class="flex items-center gap-sm px-md py-sm bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-all font-label-md cursor-pointer"
+                    >
+                        <span class="material-symbols-outlined">add</span>
+                        Agregar
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="bg-surface-container-high/50">
+                                <th class="px-md py-sm font-label-md text-on-surface-variant uppercase tracking-wider text-[11px]">Imagen</th>
+                                <th class="px-md py-sm font-label-md text-on-surface-variant uppercase tracking-wider text-[11px]">Nombre</th>
+                                <th class="px-md py-sm font-label-md text-on-surface-variant uppercase tracking-wider text-[11px]">Costo</th>
+                                <th class="px-md py-sm font-label-md text-on-surface-variant uppercase tracking-wider text-[11px]">Precio</th>
+                                <th class="px-md py-sm font-label-md text-on-surface-variant uppercase tracking-wider text-[11px]">Margen</th>
+                                <th class="px-md py-sm font-label-md text-on-surface-variant uppercase tracking-wider text-[11px]">Stock</th>
+                                <th class="px-md py-sm font-label-md text-on-surface-variant uppercase tracking-wider text-[11px]">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBodyNutricion" class="divide-y divide-outline-variant/10">
+                            <!-- Filled by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- ROPA TAB -->
+        <div id="tabRopa" class="tab-content hidden">
+            <!-- Stats Cards -->
+            <section class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-lg">
+                <div class="glass-panel rounded-xl p-md inner-glow bloom-shadow">
+                    <div class="flex justify-between items-start mb-sm">
+                        <div>
+                            <p class="font-label-md text-on-surface-variant mb-xs">Total Productos</p>
+                            <h3 class="font-headline-md text-primary" id="totalProductsRopa">0</h3>
+                        </div>
+                        <div class="p-2 bg-primary/10 rounded-lg">
+                            <span class="material-symbols-outlined text-primary">inventory_2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-xl p-md inner-glow bloom-shadow">
+                    <div class="flex justify-between items-start mb-sm">
+                        <div>
+                            <p class="font-label-md text-on-surface-variant mb-xs">Costo Total</p>
+                            <h3 class="font-headline-md text-error" id="costoTotalRopa">$0</h3>
+                        </div>
+                        <div class="p-2 bg-error/10 rounded-lg">
+                            <span class="material-symbols-outlined text-error">paid</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-xl p-md inner-glow bloom-shadow">
+                    <div class="flex justify-between items-start mb-sm">
+                        <div>
+                            <p class="font-label-md text-on-surface-variant mb-xs">Valor Venta</p>
+                            <h3 class="font-headline-md text-primary" id="valorTotalRopa">$0</h3>
+                        </div>
+                        <div class="p-2 bg-primary/10 rounded-lg">
+                            <span class="material-symbols-outlined text-primary">attach_money</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-xl p-md inner-glow bloom-shadow">
+                    <div class="flex justify-between items-start mb-sm">
+                        <div>
+                            <p class="font-label-md text-on-surface-variant mb-xs">Ganancia Bruta</p>
+                            <h3 class="font-headline-md text-secondary" id="gananciaGeneralRopa">$0</h3>
+                        </div>
+                        <div class="p-2 bg-secondary/10 rounded-lg">
+                            <span class="material-symbols-outlined text-secondary">trending_up</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Products Table -->
+            <section class="glass-panel rounded-xl overflow-hidden inner-glow bloom-shadow">
+                <div class="p-md border-b border-outline-variant/20 flex justify-between items-center">
+                    <h3 class="font-headline-sm text-on-surface">Productos - Ropa Deportiva</h3>
+                    <button
+                        onclick="document.getElementById('addProductModal').classList.remove('hidden')"
+                        class="flex items-center gap-sm px-md py-sm bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-all font-label-md cursor-pointer"
+                    >
+                        <span class="material-symbols-outlined">add</span>
+                        Agregar
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="bg-surface-container-high/50">
+                                <th class="px-md py-sm font-label-md text-on-surface-variant uppercase tracking-wider text-[11px]">Imagen</th>
+                                <th class="px-md py-sm font-label-md text-on-surface-variant uppercase tracking-wider text-[11px]">Nombre</th>
+                                <th class="px-md py-sm font-label-md text-on-surface-variant uppercase tracking-wider text-[11px]">Costo</th>
+                                <th class="px-md py-sm font-label-md text-on-surface-variant uppercase tracking-wider text-[11px]">Precio</th>
+                                <th class="px-md py-sm font-label-md text-on-surface-variant uppercase tracking-wider text-[11px]">Margen</th>
+                                <th class="px-md py-sm font-label-md text-on-surface-variant uppercase tracking-wider text-[11px]">Stock</th>
+                                <th class="px-md py-sm font-label-md text-on-surface-variant uppercase tracking-wider text-[11px]">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBodyRopa" class="divide-y divide-outline-variant/10">
+                            <!-- Filled by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- ESTADÍSTICAS TAB -->
+        <div id="tabEstadisticas" class="tab-content hidden">
+            <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-lg">
+                <div class="glass-panel rounded-xl p-md inner-glow bloom-shadow">
+                    <div class="flex justify-between items-start mb-sm">
+                        <div>
+                            <p class="font-label-md text-on-surface-variant mb-xs">Total Productos</p>
+                            <h3 class="font-headline-md text-primary" id="totalProductosGral">0</h3>
+                        </div>
+                        <div class="p-2 bg-primary/10 rounded-lg">
+                            <span class="material-symbols-outlined text-primary">all_inclusive</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-xl p-md inner-glow bloom-shadow">
+                    <div class="flex justify-between items-start mb-sm">
+                        <div>
+                            <p class="font-label-md text-on-surface-variant mb-xs">Inventario Total</p>
+                            <h3 class="font-headline-md text-tertiary" id="inventarioTotal">0</h3>
+                        </div>
+                        <div class="p-2 bg-tertiary/10 rounded-lg">
+                            <span class="material-symbols-outlined text-tertiary">warehouse</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-xl p-md inner-glow bloom-shadow">
+                    <div class="flex justify-between items-start mb-sm">
+                        <div>
+                            <p class="font-label-md text-on-surface-variant mb-xs">Costo Total</p>
+                            <h3 class="font-headline-md text-error" id="costoTotalGral">$0</h3>
+                        </div>
+                        <div class="p-2 bg-error/10 rounded-lg">
+                            <span class="material-symbols-outlined text-error">paid</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-xl p-md inner-glow bloom-shadow">
+                    <div class="flex justify-between items-start mb-sm">
+                        <div>
+                            <p class="font-label-md text-on-surface-variant mb-xs">Valor Inventario</p>
+                            <h3 class="font-headline-md text-primary" id="valorInventarioGral">$0</h3>
+                        </div>
+                        <div class="p-2 bg-primary/10 rounded-lg">
+                            <span class="material-symbols-outlined text-primary">attach_money</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-xl p-md inner-glow bloom-shadow">
+                    <div class="flex justify-between items-start mb-sm">
+                        <div>
+                            <p class="font-label-md text-on-surface-variant mb-xs">Ganancia Potencial</p>
+                            <h3 class="font-headline-md text-secondary" id="gananciaPotencial">$0</h3>
+                        </div>
+                        <div class="p-2 bg-secondary/10 rounded-lg">
+                            <span class="material-symbols-outlined text-secondary">trending_up</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-xl p-md inner-glow bloom-shadow">
+                    <div class="flex justify-between items-start mb-sm">
+                        <div>
+                            <p class="font-label-md text-on-surface-variant mb-xs">Margen Promedio</p>
+                            <h3 class="font-headline-md text-secondary" id="margenPromedio">0%</h3>
+                        </div>
+                        <div class="p-2 bg-secondary/10 rounded-lg">
+                            <span class="material-symbols-outlined text-secondary">percent</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-xl p-md inner-glow bloom-shadow">
+                    <div class="flex justify-between items-start mb-sm">
+                        <div>
+                            <p class="font-label-md text-on-surface-variant mb-xs">Stock Crítico</p>
+                            <h3 class="font-headline-md text-error" id="stockCritico">0</h3>
+                        </div>
+                        <div class="p-2 bg-error/10 rounded-lg">
+                            <span class="material-symbols-outlined text-error">warning</span>
+                        </div>
+                    </div>
+                    <p class="font-label-sm text-on-surface-variant mt-sm">(menos de 5)</p>
+                </div>
+            </section>
+
+            <section class="glass-panel rounded-xl p-md inner-glow bloom-shadow">
+                <h3 class="font-headline-sm text-on-surface mb-md">Resumen por Categoría</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+                    <div class="bg-surface-container-low/50 rounded-lg p-md border border-outline-variant/20">
+                        <p class="font-label-md text-on-surface-variant mb-sm">💊 Nutrición</p>
+                        <div class="space-y-xs">
+                            <div class="flex justify-between">
+                                <span class="text-on-surface-variant">Productos:</span>
+                                <span class="text-primary font-bold" id="statsNutricionProd">0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-on-surface-variant">Stock:</span>
+                                <span class="text-tertiary font-bold" id="statsNutricionStock">0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-on-surface-variant">Valor:</span>
+                                <span class="text-secondary font-bold" id="statsNutricionValor">$0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-surface-container-low/50 rounded-lg p-md border border-outline-variant/20">
+                        <p class="font-label-md text-on-surface-variant mb-sm">👕 Ropa Deportiva</p>
+                        <div class="space-y-xs">
+                            <div class="flex justify-between">
+                                <span class="text-on-surface-variant">Productos:</span>
+                                <span class="text-primary font-bold" id="statsRopaProd">0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-on-surface-variant">Stock:</span>
+                                <span class="text-tertiary font-bold" id="statsRopaStock">0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-on-surface-variant">Valor:</span>
+                                <span class="text-secondary font-bold" id="statsRopaValor">$0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- CONFIGURACIÓN TAB -->
+        <div id="tabConfiguracion" class="tab-content hidden">
+            <section class="glass-panel rounded-xl p-md inner-glow bloom-shadow">
+                <h3 class="font-headline-sm text-on-surface mb-md">Información de Sesión</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+                    <div class="bg-surface-container-low/50 rounded-lg p-md border border-outline-variant/20">
+                        <p class="font-label-md text-on-surface-variant mb-sm">👤 Usuario</p>
+                        <p class="text-on-surface font-body-md" id="configEmail">--</p>
+                    </div>
+
+                    <div class="bg-surface-container-low/50 rounded-lg p-md border border-outline-variant/20">
+                        <p class="font-label-md text-on-surface-variant mb-sm">🔐 Autenticación</p>
+                        <p class="text-on-surface font-body-md">Firebase Auth v8</p>
+                    </div>
+
+                    <div class="bg-surface-container-low/50 rounded-lg p-md border border-outline-variant/20">
+                        <p class="font-label-md text-on-surface-variant mb-sm">⏰ Sesión Iniciada</p>
+                        <p class="text-on-surface font-body-md" id="configLoginTime">--</p>
+                    </div>
+
+                    <div class="bg-surface-container-low/50 rounded-lg p-md border border-outline-variant/20">
+                        <p class="font-label-md text-on-surface-variant mb-sm">🖥️ Navegador</p>
+                        <p class="text-on-surface font-body-md" id="configBrowser">--</p>
+                    </div>
+
+                    <div class="bg-surface-container-low/50 rounded-lg p-md border border-outline-variant/20">
+                        <p class="font-label-md text-on-surface-variant mb-sm">💾 Almacenamiento</p>
+                        <p class="text-on-surface font-body-md" id="configStorage">LocalStorage Activo</p>
+                    </div>
+
+                    <div class="bg-surface-container-low/50 rounded-lg p-md border border-outline-variant/20">
+                        <p class="font-label-md text-on-surface-variant mb-sm">📊 Proyecto</p>
+                        <p class="text-on-surface font-body-md">ROMORE Athletic</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="glass-panel rounded-xl p-md inner-glow bloom-shadow mt-lg">
+                <h3 class="font-headline-sm text-on-surface mb-md">Base de Datos</h3>
+                <div class="space-y-sm">
+                    <button onclick="exportarDatos()" class="w-full px-md py-sm bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-all font-label-md flex items-center justify-center gap-sm">
+                        <span class="material-symbols-outlined">download</span>
+                        Descargar Respaldo (JSON)
+                    </button>
+                    <button onclick="limpiarDatos()" class="w-full px-md py-sm bg-error/10 text-error rounded-lg hover:bg-error/20 transition-all font-label-md flex items-center justify-center gap-sm">
+                        <span class="material-symbols-outlined">delete</span>
+                        Limpiar Datos Locales
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Add Product Modal -->
+    <div id="addProductModal" class="fixed inset-0 bg-background/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="glass-panel rounded-2xl p-lg max-w-md w-full mx-4 inner-glow">
+            <h3 class="font-headline-sm text-on-surface mb-md">Agregar Nuevo Producto</h3>
+
+            <form id="productForm" onsubmit="addProduct(event)" class="space-y-md">
+                <div>
+                    <label class="font-label-md text-on-surface block mb-sm">Nombre</label>
+                    <input id="productName" type="text" required class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-4 py-2 text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-all">
+                </div>
+
+                <div>
+                    <label class="font-label-md text-on-surface block mb-sm">Precio</label>
+                    <input id="productPrice" type="number" step="0.01" required class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-4 py-2 text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-all">
+                </div>
+
+                <div>
+                    <label class="font-label-md text-on-surface block mb-sm">Costo</label>
+                    <input id="productCost" type="number" step="0.01" class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-4 py-2 text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-all" placeholder="Costo del producto">
+                </div>
+
+                <div>
+                    <label class="font-label-md text-on-surface block mb-sm">Stock</label>
+                    <input id="productStock" type="number" required class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-4 py-2 text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-all">
+                </div>
+
+                <div>
+                    <label class="font-label-md text-on-surface block mb-sm">URL de Imagen</label>
+                    <input id="productImage" type="url" class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-4 py-2 text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-all" placeholder="https://ejemplo.com/imagen.jpg">
+                </div>
+
+                <div>
+                    <label class="font-label-md text-on-surface block mb-sm">Descripción</label>
+                    <textarea id="productDescription" class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-4 py-2 text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-all" rows="3"></textarea>
+                </div>
+
+                <div class="flex gap-sm">
+                    <button type="submit" class="flex-1 py-2 bg-primary text-on-primary font-label-md rounded-lg hover:shadow-[0_0_15px_rgba(221,183,255,0.4)] transition-all">
+                        Guardar
+                    </button>
+                    <button type="button" onclick="document.getElementById('addProductModal').classList.add('hidden')" class="flex-1 py-2 bg-surface-container-high border border-outline-variant/30 text-on-surface font-label-md rounded-lg hover:bg-white/5 transition-all">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Product Modal -->
+    <div id="editProductModal" class="fixed inset-0 bg-background/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="glass-panel rounded-2xl p-lg max-w-md w-full mx-4 inner-glow">
+            <h3 class="font-headline-sm text-on-surface mb-md">Editar Producto</h3>
+
+            <form id="editProductForm" onsubmit="guardarEdicion(event)" class="space-y-md">
+                <div>
+                    <label class="font-label-md text-on-surface block mb-sm">Nombre</label>
+                    <input id="editProductName" type="text" required class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-4 py-2 text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-all">
+                </div>
+
+                <div>
+                    <label class="font-label-md text-on-surface block mb-sm">Precio</label>
+                    <input id="editProductPrice" type="number" step="0.01" required class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-4 py-2 text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-all">
+                </div>
+
+                <div>
+                    <label class="font-label-md text-on-surface block mb-sm">Costo</label>
+                    <input id="editProductCost" type="number" step="0.01" class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-4 py-2 text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-all">
+                </div>
+
+                <div>
+                    <label class="font-label-md text-on-surface block mb-sm">Stock</label>
+                    <input id="editProductStock" type="number" required class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-4 py-2 text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-all">
+                </div>
+
+                <div>
+                    <label class="font-label-md text-on-surface block mb-sm">URL de Imagen <span style="color: #888; font-size: 12px;">(dejar en blanco para mantener actual)</span></label>
+                    <input id="editProductImage" type="text" class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-4 py-2 text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-all">
+                </div>
+
+                <div>
+                    <label class="font-label-md text-on-surface block mb-sm">Descripción</label>
+                    <textarea id="editProductDescription" class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg px-4 py-2 text-on-surface focus:ring-2 focus:ring-primary focus:outline-none transition-all" rows="3"></textarea>
+                </div>
+
+                <div class="flex gap-sm">
+                    <button type="submit" class="flex-1 py-2 bg-primary text-on-primary font-label-md rounded-lg hover:shadow-[0_0_15px_rgba(221,183,255,0.4)] transition-all">
+                        Guardar Cambios
+                    </button>
+                    <button type="button" onclick="cerrarEdicion()" class="flex-1 py-2 bg-surface-container-high border border-outline-variant/30 text-on-surface font-label-md rounded-lg hover:bg-white/5 transition-all">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="fixed inset-0 bg-background/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="glass-panel rounded-2xl p-lg max-w-md w-full mx-4 inner-glow">
+            <h3 class="font-headline-sm text-on-surface mb-md">Ayuda Rápida</h3>
+
+            <div class="space-y-md">
+                <div class="bg-surface-container-low/50 rounded-lg p-md border border-outline-variant/20">
+                    <p class="font-label-md text-primary mb-sm">📱 ContactoAdmin</p>
+                    <p class="font-body-md text-on-surface-variant">WhatsApp: +573116377287</p>
+                </div>
+
+                <div class="bg-surface-container-low/50 rounded-lg p-md border border-outline-variant/20">
+                    <p class="font-label-md text-tertiary mb-sm">💾 Tu Sesión</p>
+                    <p class="font-body-md text-on-surface-variant" id="helpSession">Sesión activa</p>
+                </div>
+
+                <button onclick="document.getElementById('settingsModal').classList.add('hidden')" class="w-full py-2 bg-surface-container-high border border-outline-variant/30 text-on-surface font-label-md rounded-lg hover:bg-white/5 transition-all">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== SCRIPTS ========== -->
+<script>
+    // Firebase Configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyCT6StnuHvECePZnsrB-ueqJsx_uLPcrAU",
+        authDomain: "romore-admin.firebaseapp.com",
+        projectId: "romore-admin",
+        storageBucket: "romore-admin.appspot.com",
+        messagingSenderId: "1004587660155",
+        appId: "1:1004587660155:web:37a2792b784e1988df03de"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // DOM Elements
+    const loginScreen = document.getElementById('loginScreen');
+    const dashboardContent = document.getElementById('dashboardContent');
+    const adminEmail = document.getElementById('adminEmail');
+    const adminPassword = document.getElementById('adminPassword');
+    const loginError = document.getElementById('loginError');
+    const loginLoading = document.getElementById('loginLoading');
+    const userInfo = document.getElementById('userInfo');
+
+    // Current selected category
+    let currentCategory = 'nutricion';
+    let sessionStartTime = null;
+    let products = {
+        nutricion: JSON.parse(localStorage.getItem('productosNutricion') || '[]'),
+        ropa: JSON.parse(localStorage.getItem('productosRopa') || '[]')
+    };
+
+    // Cargar productos precargados si es la primera vez
+    async function cargarProductosPrecargados() {
+        const cargadosAntes = localStorage.getItem('productosNutricion') && localStorage.getItem('productosRopa');
+        const datos = localStorage.getItem('productosNutricion');
+        const productosGuardados = datos ? JSON.parse(datos) : [];
+
+        // Si ya hay productos guardados (más de 2), no cargar precargados
+        if (productosGuardados.length > 2) return;
+
+        try {
+            const response = await fetch('./productos.json');
+            const data = await response.json();
+            products.nutricion = data.nutricion;
+            products.ropa = data.ropa;
+            saveProducts();
+            console.log('✓ Productos precargados cargados');
+        } catch (error) {
+            console.log('Productos.json no disponible, usando localStorage');
+        }
+    }
+
+    // Authentication state listener
+    auth.onAuthStateChanged(async (user) => {
+        if (user) {
+            loginScreen.classList.add('hidden');
+            dashboardContent.classList.remove('hidden');
+            userInfo.textContent = user.email;
+            document.getElementById('configEmail').textContent = user.email;
+            document.getElementById('helpSession').textContent = `Sesión: ${user.email}`;
+            sessionStartTime = new Date();
+
+            // Cargar productos precargados si es la primera vez
+            await cargarProductosPrecargados();
+
+            renderProducts();
+            updateStats();
+            updateEstadisticas();
+            updateConfiguracion();
+        } else {
+            loginScreen.classList.remove('hidden');
+            dashboardContent.classList.add('hidden');
+        }
+    });
+
+    // Login Function with reCAPTCHA v3
+    async function loginAdmin(event) {
+        event.preventDefault();
+        const email = adminEmail.value.trim();
+        const password = adminPassword.value.trim();
+
+        if (!email || !password) {
+            mostrarError('Por favor completa todos los campos');
+            return;
+        }
+
+        loginLoading.classList.remove('hidden');
+        loginError.classList.add('hidden');
+
+        try {
+            // Execute reCAPTCHA v3
+            const recaptchaToken = await grecaptcha.execute('6LeQc_4sAAAAAJ-4HbwcfBcUAA5faSRGrYzo9hoP', {action: 'submit'});
+            document.getElementById('recaptchaToken').value = recaptchaToken;
+            console.log('reCAPTCHA token obtenido');
+
+            // Authenticate with Firebase
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    console.log('Login exitoso:', userCredential.user.email);
+                    loginLoading.classList.add('hidden');
+                    adminPassword.value = '';
+                    // Token reCAPTCHA se mantiene por si se necesita validar en servidor
+                })
+                .catch((error) => {
+                    loginLoading.classList.add('hidden');
+                    const errorMessages = {
+                        'auth/user-not-found': 'El usuario no existe.',
+                        'auth/wrong-password': 'Contraseña incorrecta.',
+                        'auth/invalid-email': 'Email inválido.',
+                        'auth/user-disabled': 'Cuenta deshabilitada.',
+                        'auth/too-many-requests': 'Demasiados intentos. Intenta más tarde.'
+                    };
+                    const mensaje = errorMessages[error.code] || 'Error al iniciar sesión.';
+                    mostrarError(mensaje);
+                });
+        } catch (recaptchaError) {
+            loginLoading.classList.add('hidden');
+            console.error('Error con reCAPTCHA:', recaptchaError);
+            mostrarError('Error de seguridad. Por favor intenta de nuevo.');
+        }
+    }
+
+    // Logout Function
+    function logoutAdmin() {
+        if (confirm('¿Deseas cerrar sesión?')) {
+            auth.signOut().then(() => {
+                adminEmail.value = '';
+                adminPassword.value = '';
+            });
+        }
+    }
+
+    // Show Error
+    function mostrarError(mensaje) {
+        loginError.textContent = '❌ ' + mensaje;
+        loginError.classList.remove('hidden');
+        setTimeout(() => {
+            loginError.classList.add('hidden');
+        }, 5000);
+    }
+
+    // Switch Tab - FIXED NEON LIGHT
+    function switchTab(category) {
+        currentCategory = category;
+
+        // Ocultar todos los tabs
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.add('hidden');
+        });
+
+        // Remover clase activa de todos los botones nav
+        document.querySelectorAll('[id^="nav"]').forEach(btn => {
+            btn.classList.remove('nav-item-active');
+            btn.classList.add('nav-item-inactive');
+        });
+
+        // Mostrar el tab correcto y activar botón
+        if (category === 'nutricion') {
+            document.getElementById('tabNutricion').classList.remove('hidden');
+            document.getElementById('navNutricion').classList.remove('nav-item-inactive');
+            document.getElementById('navNutricion').classList.add('nav-item-active');
+        } else if (category === 'ropa') {
+            document.getElementById('tabRopa').classList.remove('hidden');
+            document.getElementById('navRopa').classList.remove('nav-item-inactive');
+            document.getElementById('navRopa').classList.add('nav-item-active');
+        } else if (category === 'estadisticas') {
+            document.getElementById('tabEstadisticas').classList.remove('hidden');
+            document.getElementById('navStats').classList.remove('nav-item-inactive');
+            document.getElementById('navStats').classList.add('nav-item-active');
+            updateEstadisticas();
+        } else if (category === 'configuracion') {
+            document.getElementById('tabConfiguracion').classList.remove('hidden');
+            document.getElementById('navConfig').classList.remove('nav-item-inactive');
+            document.getElementById('navConfig').classList.add('nav-item-active');
+            updateConfiguracion();
+        }
+
+        renderProducts();
+    }
+
+    // Add Product
+    function addProduct(event) {
+        event.preventDefault();
+
+        const newProduct = {
+            id: Date.now(),
+            nombre: document.getElementById('productName').value,
+            precio: parseFloat(document.getElementById('productPrice').value),
+            costo: parseFloat(document.getElementById('productCost').value) || 0,
+            stock: parseInt(document.getElementById('productStock').value),
+            descripcion: document.getElementById('productDescription').value,
+            imagen: document.getElementById('productImage').value || 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100"%3E%3Crect fill="%23555" width="100" height="100"/%3E%3Ctext x="50" y="50" text-anchor="middle" dy=".3em" fill="%23999" font-size="12"%3ESin imagen%3C/text%3E%3C/svg%3E'
+        };
+
+        products[currentCategory].push(newProduct);
+        saveProducts();
+        renderProducts();
+        updateStats();
+
+        document.getElementById('productForm').reset();
+        document.getElementById('addProductModal').classList.add('hidden');
+    }
+
+    // Render Products
+    function renderProducts() {
+        const tbodyNutricion = document.getElementById('productTableBodyNutricion');
+        const tbodyRopa = document.getElementById('productTableBodyRopa');
+
+        tbodyNutricion.innerHTML = '';
+        tbodyRopa.innerHTML = '';
+
+        const renderTable = (tbody, categoryProducts) => {
+            categoryProducts.forEach((product, index) => {
+                const margen = product.precio - (product.costo || 0);
+                const margenPorcentaje = product.costo > 0 ? ((margen / product.costo) * 100).toFixed(1) : 0;
+                const margenColor = margen > 0 ? 'text-secondary' : 'text-error';
+
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-white/5 transition-colors group';
+                row.innerHTML = `
+                    <td class="px-md py-md">
+                        <img src="${product.imagen}" alt="${product.nombre}" class="w-12 h-12 rounded object-cover border border-outline-variant/30">
+                    </td>
+                    <td class="px-md py-md font-body-md text-on-surface">${product.nombre}</td>
+                    <td class="px-md py-md font-body-md text-on-surface-variant">$${(product.costo || 0).toFixed(2)}</td>
+                    <td class="px-md py-md font-body-md text-primary">$${product.precio.toFixed(2)}</td>
+                    <td class="px-md py-md font-body-md ${margenColor}">$${margen.toFixed(2)} (${margenPorcentaje}%)</td>
+                    <td class="px-md py-md font-body-md text-on-surface">${product.stock} unidades</td>
+                    <td class="px-md py-md">
+                        <div class="flex gap-sm">
+                            <button onclick="editProduct('${currentCategory}', ${product.id})" class="text-tertiary hover:text-tertiary/80 transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">edit</span>
+                            </button>
+                            <button onclick="deleteProduct('${currentCategory}', ${product.id})" class="text-error hover:text-error/80 transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">delete</span>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        };
+
+        renderTable(tbodyNutricion, products.nutricion);
+        renderTable(tbodyRopa, products.ropa);
+    }
+
+    // Variable to store the product being edited
+    let editingProduct = null;
+
+    // Edit Product - Open modal and populate with current data
+    function editProduct(category, id) {
+        const product = products[category].find(p => p.id === id);
+        if (!product) return;
+
+        editingProduct = { category, id };
+
+        // Populate form fields
+        document.getElementById('editProductName').value = product.nombre;
+        document.getElementById('editProductPrice').value = product.precio;
+        document.getElementById('editProductCost').value = product.costo || 0;
+        document.getElementById('editProductStock').value = product.stock;
+        document.getElementById('editProductImage').value = product.imagen;
+        document.getElementById('editProductDescription').value = product.descripcion;
+
+        // Show modal
+        document.getElementById('editProductModal').classList.remove('hidden');
+    }
+
+    // Save Edition - Update product and save
+    function guardarEdicion(event) {
+        event.preventDefault();
+
+        if (!editingProduct) return;
+
+        const { category, id } = editingProduct;
+        const product = products[category].find(p => p.id === id);
+
+        if (!product) return;
+
+        // Update product with form values
+        product.nombre = document.getElementById('editProductName').value;
+        product.precio = parseFloat(document.getElementById('editProductPrice').value);
+        product.costo = parseFloat(document.getElementById('editProductCost').value) || 0;
+        product.stock = parseInt(document.getElementById('editProductStock').value);
+        product.descripcion = document.getElementById('editProductDescription').value;
+
+        // Solo actualizar imagen si el campo no está vacío
+        const newImage = document.getElementById('editProductImage').value;
+        if (newImage && newImage.trim()) {
+            product.imagen = newImage;
+        }
+
+        // Save and refresh
+        saveProducts();
+        renderProducts();
+        updateStats();
+        updateEstadisticas();
+
+        cerrarEdicion();
+    }
+
+    // Close Edit Modal
+    function cerrarEdicion() {
+        document.getElementById('editProductModal').classList.add('hidden');
+        document.getElementById('editProductForm').reset();
+        editingProduct = null;
+    }
+
+    // Delete Product
+    function deleteProduct(category, id) {
+        if (confirm('¿Eliminar este producto?')) {
+            products[category] = products[category].filter(p => p.id !== id);
+            saveProducts();
+            renderProducts();
+            updateStats();
+        }
+    }
+
+    // Save Products to localStorage
+    function saveProducts() {
+        localStorage.setItem('productosNutricion', JSON.stringify(products.nutricion));
+        localStorage.setItem('productosRopa', JSON.stringify(products.ropa));
+    }
+
+    // Update Statistics
+    function updateStats() {
+        const nutricion = products.nutricion;
+        const ropa = products.ropa;
+
+        // Nutrición
+        const costoNutricion = nutricion.reduce((sum, p) => sum + ((p.costo || 0) * p.stock), 0);
+        const valorNutricion = nutricion.reduce((sum, p) => sum + (p.precio * p.stock), 0);
+        const gananciaNutricion = valorNutricion - costoNutricion;
+
+        document.getElementById('totalProductsNutricion').textContent = nutricion.length;
+        document.getElementById('costoTotalNutricion').textContent = '$' + costoNutricion.toFixed(2);
+        document.getElementById('valorTotalNutricion').textContent = '$' + valorNutricion.toFixed(2);
+        document.getElementById('gananciaBrutaNutricion').textContent = '$' + gananciaNutricion.toFixed(2);
+
+        // Ropa
+        const costoRopa = ropa.reduce((sum, p) => sum + ((p.costo || 0) * p.stock), 0);
+        const valorRopa = ropa.reduce((sum, p) => sum + (p.precio * p.stock), 0);
+        const gananciaRopa = valorRopa - costoRopa;
+
+        document.getElementById('totalProductsRopa').textContent = ropa.length;
+        document.getElementById('costoTotalRopa').textContent = '$' + costoRopa.toFixed(2);
+        document.getElementById('valorTotalRopa').textContent = '$' + valorRopa.toFixed(2);
+        document.getElementById('gananciaGeneralRopa').textContent = '$' + gananciaRopa.toFixed(2);
+    }
+
+    // Update Estadísticas
+    function updateEstadisticas() {
+        const allProducts = [...products.nutricion, ...products.ropa];
+        const totalStock = allProducts.reduce((sum, p) => sum + p.stock, 0);
+        const criticalStock = allProducts.filter(p => p.stock < 5).length;
+
+        // Costos y valores
+        const costoTotal = allProducts.reduce((sum, p) => sum + ((p.costo || 0) * p.stock), 0);
+        const valorInventario = allProducts.reduce((sum, p) => sum + (p.precio * p.stock), 0);
+        const gananciaPotencial = valorInventario - costoTotal;
+
+        // Margen promedio
+        const productosConCosto = allProducts.filter(p => p.costo > 0);
+        const margenPromedio = productosConCosto.length > 0
+            ? Math.round(productosConCosto.reduce((sum, p) => sum + ((p.precio - p.costo) / p.costo * 100), 0) / productosConCosto.length)
+            : 0;
+
+        document.getElementById('totalProductosGral').textContent = allProducts.length;
+        document.getElementById('inventarioTotal').textContent = totalStock;
+        document.getElementById('costoTotalGral').textContent = '$' + costoTotal.toFixed(2);
+        document.getElementById('valorInventarioGral').textContent = '$' + valorInventario.toFixed(2);
+        document.getElementById('gananciaPotencial').textContent = '$' + gananciaPotencial.toFixed(2);
+        document.getElementById('margenPromedio').textContent = margenPromedio + '%';
+        document.getElementById('stockCritico').textContent = criticalStock;
+
+        // Resumen por categoría
+        document.getElementById('statsNutricionProd').textContent = products.nutricion.length;
+        document.getElementById('statsNutricionStock').textContent = products.nutricion.reduce((sum, p) =
