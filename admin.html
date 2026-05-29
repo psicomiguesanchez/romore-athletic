@@ -1197,4 +1197,24 @@
     }
 
     // Limpiar Datos
-    function limpiarDatos()
+    function limpiarDatos() {
+        const confirmar = confirm('¿Seguro que deseas borrar todos los datos locales? Esta acción no se puede deshacer.');
+        if (!confirmar) return;
+
+        localStorage.removeItem('productosNutricion');
+        localStorage.removeItem('productosRopa');
+
+        products.nutricion = [];
+        products.ropa = [];
+
+        renderProducts();
+        updateStats();
+        updateEstadisticas();
+        updateConfiguracion();
+
+        alert('Los datos locales han sido eliminados.');
+    }
+
+</script>
+</body>
+</html>

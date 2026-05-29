@@ -707,4 +707,44 @@
         }
 
         function cerrarModal() {
-            document.getElementById('modalDetalle')
+            document.getElementById('modalDetalle').classList.remove('show');
+            productoActualModal = null;
+        }
+
+        // Cambiar entre pestañas (Nutrición / Ropa)
+        function cambiarTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            const contenido = document.getElementById(tabId);
+            if (contenido) contenido.classList.add('active');
+            const ev = window.event;
+            if (ev && ev.target) ev.target.classList.add('active');
+        }
+
+        // Enviar pedido por WhatsApp
+        function enviarPedido() {
+            if (carrito.length === 0) return;
+
+            let mensaje = '¡Hola ROMORE Athletic! 🏃 Quiero hacer el siguiente pedido:%0A%0A';
+            let total = 0;
+
+            carrito.forEach(item => {
+                const subtotal = item.precio * item.cantidad;
+                total += subtotal;
+                mensaje += '• ' + item.nombre + ' x' + item.cantidad + ' - $' + subtotal.toLocaleString('es-CO') + '%0A';
+            });
+
+            mensaje += '%0A*TOTAL: $' + total.toLocaleString('es-CO') + '*';
+
+            const numero = NUMERO_WHATSAPP.replace(/[^0-9]/g, '');
+            const url = 'https://wa.me/' + numero + '?text=' + mensaje;
+            window.open(url, '_blank');
+        }
+
+        // Inicializar tienda
+        cargarProductos();
+        actualizarCarrito();
+
+    </script>
+</body>
+</html>
