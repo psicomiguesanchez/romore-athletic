@@ -325,6 +325,80 @@
             display: flex;
         }
 
+        .confirmacion-card {
+            background: linear-gradient(135deg, #191f31 0%, #0c1324 100%);
+            border: 2px solid #ddb7ff;
+            border-radius: 16px;
+            padding: 40px 32px;
+            max-width: 460px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(221, 183, 255, 0.35);
+            animation: confPop 0.35s ease;
+        }
+
+        @keyframes confPop {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .confirmacion-check {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            background: rgba(74, 222, 128, 0.15);
+            color: #4ade80;
+            font-size: 40px;
+            line-height: 72px;
+            border: 2px solid #4ade80;
+        }
+
+        .confirmacion-titulo {
+            color: #ddb7ff;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .confirmacion-texto {
+            color: #c7cdda;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 22px;
+        }
+
+        .confirmacion-firma {
+            color: #fff;
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 26px;
+        }
+
+        .confirmacion-firma span {
+            color: #9aa3b5;
+            font-weight: 400;
+            font-size: 13px;
+        }
+
+        .confirmacion-btn {
+            background: linear-gradient(135deg, #ddb7ff 0%, #a855f7 100%);
+            color: #0c1324;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 36px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .confirmacion-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
+        }
+
         .modal-content {
             background: linear-gradient(135deg, #191f31 0%, #0c1324 100%);
             border: 2px solid #ddb7ff;
@@ -566,6 +640,20 @@
         </div>
     </div>
 
+    <!-- Modal de confirmación de pedido -->
+    <div id="modalConfirmacion" class="modal">
+        <div class="confirmacion-card">
+            <div class="confirmacion-check">✓</div>
+            <h2 class="confirmacion-titulo">¡HEMOS RECIBIDO TU PEDIDO!</h2>
+            <p class="confirmacion-texto">
+                Gracias por apoyar mi emprendimiento. En poco tiempo recibirás confirmación
+                de nuestra oficina de servicio al cliente para confirmar el pago y envío de tus productos.
+            </p>
+            <p class="confirmacion-firma">Att. Andre y Roma<br><span>CEO's de ROMORE Athletic</span></p>
+            <button class="confirmacion-btn" onclick="cerrarConfirmacion()">Entendido</button>
+        </div>
+    </div>
+
     <script>
         // Configuration
         const NUMERO_WHATSAPP = '+573116377287';
@@ -767,6 +855,13 @@
             const numero = NUMERO_WHATSAPP.replace(/[^0-9]/g, '');
             const url = 'https://wa.me/' + numero + '?text=' + mensaje;
             window.open(url, '_blank');
+
+            // Mostrar mensaje de confirmación en pantalla
+            document.getElementById('modalConfirmacion').classList.add('show');
+        }
+
+        function cerrarConfirmacion() {
+            document.getElementById('modalConfirmacion').classList.remove('show');
         }
 
         // Inicializar tienda
