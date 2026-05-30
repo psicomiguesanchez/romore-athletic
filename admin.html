@@ -11,6 +11,7 @@
     <!-- Firebase SDK (v8 - Compatible with HTML script tags) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <!-- reCAPTCHA v3 -->
     <script src="https://www.google.com/recaptcha/api.js?render=6LeQc_4sAAAAAJ-4HbwcfBcUAA5faSRGrYzo9hoP"></script>
@@ -659,7 +660,7 @@
 
     <!-- Add Product Modal -->
     <div id="addProductModal" class="fixed inset-0 bg-background/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
-        <div class="glass-panel rounded-2xl p-lg max-w-md w-full mx-4 inner-glow">
+        <div class="glass-panel rounded-2xl p-lg max-w-md w-full mx-4 inner-glow max-h-[90vh] overflow-y-auto">
             <h3 class="font-headline-sm text-on-surface mb-md">Agregar Nuevo Producto</h3>
 
             <form id="productForm" onsubmit="addProduct(event)" class="space-y-md">
@@ -707,7 +708,7 @@
 
     <!-- Edit Product Modal -->
     <div id="editProductModal" class="fixed inset-0 bg-background/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
-        <div class="glass-panel rounded-2xl p-lg max-w-md w-full mx-4 inner-glow">
+        <div class="glass-panel rounded-2xl p-lg max-w-md w-full mx-4 inner-glow max-h-[90vh] overflow-y-auto">
             <h3 class="font-headline-sm text-on-surface mb-md">Editar Producto</h3>
 
             <form id="editProductForm" onsubmit="guardarEdicion(event)" class="space-y-md">
@@ -755,7 +756,7 @@
 
     <!-- Settings Modal -->
     <div id="settingsModal" class="fixed inset-0 bg-background/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
-        <div class="glass-panel rounded-2xl p-lg max-w-md w-full mx-4 inner-glow">
+        <div class="glass-panel rounded-2xl p-lg max-w-md w-full mx-4 inner-glow max-h-[90vh] overflow-y-auto">
             <h3 class="font-headline-sm text-on-surface mb-md">Ayuda Rápida</h3>
 
             <div class="space-y-md">
@@ -792,6 +793,7 @@
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
+    const db = firebase.firestore();
 
     // DOM Elements
     const loginScreen = document.getElementById('loginScreen');
@@ -810,15 +812,30 @@
         ropa: JSON.parse(localStorage.getItem('productosRopa') || '[]')
     };
 
-    // Cargar productos precargados si es la primera vez
+    // Cargar productos: primero Firestore (fuente de verdad), luego localStorage / productos.json
     async function cargarProductosPrecargados() {
-        const cargadosAntes = localStorage.getItem('productosNutricion') && localStorage.getItem('productosRopa');
+        // 1) Intentar Firestore (catálogo compartido)
+        try {
+            const doc = await db.collection('tienda').doc('catalogo').get();
+            if (doc.exists) {
+                const data = doc.data();
+                products.nutricion = data.nutricion || [];
+                products.ropa = data.ropa || [];
+                localStorage.setItem('productosNutricion', JSON.stringify(products.nutricion));
+                localStorage.setItem('productosRopa', JSON.stringify(products.ropa));
+                console.log('✓ Catálogo cargado desde Firestore');
+                return;
+            }
+        } catch (error) {
+            console.log('Firestore no disponible, usando datos locales');
+        }
+
+        // 2) Si ya hay productos guardados localmente (más de 2), conservarlos
         const datos = localStorage.getItem('productosNutricion');
         const productosGuardados = datos ? JSON.parse(datos) : [];
-
-        // Si ya hay productos guardados (más de 2), no cargar precargados
         if (productosGuardados.length > 2) return;
 
+        // 3) Primera vez: cargar precargados desde productos.json y subir a Firestore
         try {
             const response = await fetch('./productos.json');
             const data = await response.json();
@@ -1099,10 +1116,26 @@
         }
     }
 
-    // Save Products to localStorage
+    // Save Products to localStorage + Firestore (para que la tienda los vea)
     function saveProducts() {
         localStorage.setItem('productosNutricion', JSON.stringify(products.nutricion));
         localStorage.setItem('productosRopa', JSON.stringify(products.ropa));
+        sincronizarFirestore();
+    }
+
+    // Escribe el catálogo completo en Firestore. Solo usuarios autenticados pueden escribir (reglas).
+    async function sincronizarFirestore() {
+        if (!auth.currentUser) return; // sin sesión no se escribe
+        try {
+            await db.collection('tienda').doc('catalogo').set({
+                nutricion: products.nutricion,
+                ropa: products.ropa,
+                actualizado: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            console.log('✓ Catálogo sincronizado con Firestore');
+        } catch (error) {
+            console.error('Error sincronizando con Firestore:', error);
+        }
     }
 
     // Update Statistics

@@ -6,6 +6,8 @@
     <title>ROMORE - Tienda Online</title>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <style>
         * {
             margin: 0;
@@ -568,21 +570,47 @@
         // Configuration
         const NUMERO_WHATSAPP = '+573126238456';
 
+        // Firebase (solo lectura del catálogo)
+        const firebaseConfig = {
+            apiKey: "AIzaSyCT6StnuHvECePZnsrB-ueqJsx_uLPcrAU",
+            authDomain: "romore-admin.firebaseapp.com",
+            projectId: "romore-admin",
+            storageBucket: "romore-admin.appspot.com",
+            messagingSenderId: "1004587660155",
+            appId: "1:1004587660155:web:37a2792b784e1988df03de"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
         // Global State
         let productosNutricion = [];
         let productosRopa = [];
         let carrito = [];
         let productoActualModal = null;
 
-        // Load products
+        // Load products: primero Firestore (catálogo actualizado por el admin), fallback a productos.json
         async function cargarProductos() {
+            try {
+                const doc = await db.collection('tienda').doc('catalogo').get();
+                if (doc.exists) {
+                    const data = doc.data();
+                    productosNutricion = data.nutricion || [];
+                    productosRopa = data.ropa || [];
+                    renderizarProductos();
+                    console.log('✅ Catálogo cargado desde Firestore:', productosNutricion.length + productosRopa.length);
+                    return;
+                }
+            } catch (error) {
+                console.warn('Firestore no disponible, usando productos.json:', error);
+            }
+            // Fallback: archivo estático
             try {
                 const response = await fetch('./productos.json');
                 const data = await response.json();
                 productosNutricion = data.nutricion || [];
                 productosRopa = data.ropa || [];
                 renderizarProductos();
-                console.log('✅ Productos cargados:', productosNutricion.length + productosRopa.length);
+                console.log('✅ Productos cargados (json):', productosNutricion.length + productosRopa.length);
             } catch (error) {
                 console.error('Error cargando productos:', error);
             }
