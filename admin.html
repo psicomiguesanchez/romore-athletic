@@ -279,6 +279,9 @@
         </div>
         <div class="flex items-center gap-md">
             <div class="flex items-center gap-sm border-l border-outline-variant/30 pl-md">
+                <button onclick="verTienda()" title="Vista previa de la tienda" class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/10 rounded-full transition-all">
+                    <span class="material-symbols-outlined">visibility</span>
+                </button>
                 <button class="p-2 text-on-surface-variant hover:bg-primary/10 rounded-full transition-all">
                     <span class="material-symbols-outlined">notifications</span>
                 </button>
@@ -795,6 +798,11 @@
     const auth = firebase.auth();
     const db = firebase.firestore();
 
+    // Persistencia de SESIÓN: la sesión se borra al cerrar la pestaña/ventana,
+    // así el admin pide credenciales cada vez que se cierra.
+    auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .catch((e) => console.error('No se pudo fijar la persistencia de sesión:', e));
+
     // DOM Elements
     const loginScreen = document.getElementById('loginScreen');
     const dashboardContent = document.getElementById('dashboardContent');
@@ -916,6 +924,13 @@
             console.error('Error con reCAPTCHA:', recaptchaError);
             mostrarError('Error de seguridad. Por favor intenta de nuevo.');
         }
+    }
+
+    // Vista previa: abre la tienda en una pestaña nueva.
+    // Primero sincroniza por si hay cambios sin guardar, luego abre.
+    async function verTienda() {
+        try { await sincronizarFirestore(); } catch (e) {}
+        window.open('/tienda?preview=' + Date.now(), '_blank');
     }
 
     // Logout Function
